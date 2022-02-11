@@ -1,0 +1,27 @@
+2022-02-10 17:07:57 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-10 17:07:57 | Modules Initiation DONE...
+2022-02-10 17:07:57 | ===============================
+
+2022-02-10 17:07:57 | instruments RUNNING...
+2022-02-10 17:07:57 | update_reading started
+2022-02-10 17:08:01 | flow rate setpoint: 0.000 L/min
+2022-02-10 17:10:01 | flow rate setpoint: 150.000 L/min
+2022-02-10 17:10:14 | flow rate setpoint: 0.000 L/min
+2022-02-10 17:10:52 | flow rate setpoint: 150.000 L/min
+2022-02-10 17:10:57 | flow rate setpoint: 0.000 L/min
+2022-02-10 17:11:14 | flow rate setpoint: 0.000 L/min
+2022-02-10 17:11:36 | flow rate setpoint: 150.000 L/min
+2022-02-10 17:11:53 | flow rate setpoint: 0.000 L/min
+2022-02-10 17:17:15 | flow rate setpoint: 150.000 L/min
+2022-02-10 17:17:28 | flow rate setpoint: 0.000 L/min
+2022-02-10 17:20:12 | flow rate setpoint: 50.000 L/min
+2022-02-10 17:20:45 | flow rate setpoint: 150.000 L/min
+2022-02-10 17:20:54 | flow rate setpoint: 0.000 L/min
+2022-02-10 17:24:26 | flow rate setpoint: 0.000 L/min
+2022-02-10 17:24:44 | flow rate setpoint: 150.000 L/min
+2022-02-10 17:24:57 | flow rate setpoint: 0.000 L/min
+2022-02-10 17:27:04 | flow rate setpoint: 150.000 L/min
+2022-02-10 17:27:13 | flow rate setpoint: 0.000 L/min
+2022-02-10 17:28:03 | flow rate setpoint: 150.000 L/min
+2022-02-10 17:28:12 | flow rate setpoint: 0.000 L/min
+2022-02-10 17:29:43 | flow rate setpoint: 50.000 L/min

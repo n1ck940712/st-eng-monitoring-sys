@@ -1,0 +1,301 @@
+2022-02-09 13:07:18 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 13:07:18 | encrypt.init SUCCESS
+2022-02-09 13:07:18 | Modules Initiation DONE...
+2022-02-09 13:07:18 | ===============================
+
+2022-02-09 13:07:18 | main RUNNING...
+2022-02-09 13:07:18 | connection_thread started
+2022-02-09 13:07:18 | sensor_reading_update STARTED
+2022-02-09 13:07:18 | on_error. [Errno 111] Connection refused
+2022-02-09 13:07:18 | on_close. None. None
+2022-02-09 13:08:20 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 13:08:20 | encrypt.init SUCCESS
+2022-02-09 13:08:21 | Modules Initiation DONE...
+2022-02-09 13:08:21 | ===============================
+
+2022-02-09 13:08:21 | main RUNNING...
+2022-02-09 13:08:21 | connection_thread started
+2022-02-09 13:08:21 | sensor_reading_update STARTED
+2022-02-09 13:08:21 | on_error. [Errno 111] Connection refused
+2022-02-09 13:08:21 | on_close. None. None
+2022-02-09 13:08:21 | sensor_reading_update FAILED. Connection is already closed.
+2022-02-09 13:08:26 | sensor_reading_update FAILED. Connection is already closed.
+2022-02-09 13:08:31 | on_error. [Errno 111] Connection refused
+2022-02-09 13:08:31 | on_close. None. None
+2022-02-09 13:08:31 | sensor_reading_update FAILED. Connection is already closed.
+2022-02-09 13:08:37 | sensor_reading_update FAILED. Connection is already closed.
+2022-02-09 13:55:46 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 13:55:46 | encrypt.init SUCCESS
+2022-02-09 13:55:46 | Modules Initiation DONE...
+2022-02-09 13:55:46 | ===============================
+
+2022-02-09 13:55:46 | main RUNNING...
+2022-02-09 13:55:46 | connection_thread started
+2022-02-09 13:55:46 | sensor_reading_update STARTED
+2022-02-09 13:55:46 | on_error. [Errno 111] Connection refused
+2022-02-09 13:55:46 | on_close. None. None
+2022-02-09 13:55:47 | sensor_reading_update FAILED. Connection is already closed.
+2022-02-09 13:55:52 | sensor_reading_update FAILED. Connection is already closed.
+2022-02-09 14:17:46 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 14:17:47 | encrypt.init SUCCESS
+2022-02-09 14:17:47 | Modules Initiation DONE...
+2022-02-09 14:17:47 | ===============================
+
+2022-02-09 14:17:47 | main RUNNING...
+2022-02-09 14:17:47 | connection_thread started
+2022-02-09 14:17:47 | sensor_reading_update STARTED
+2022-02-09 15:22:58 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 15:22:58 | encrypt.init SUCCESS
+2022-02-09 15:22:58 | Modules Initiation DONE...
+2022-02-09 15:22:58 | ===============================
+
+2022-02-09 15:22:58 | main RUNNING...
+2022-02-09 15:22:58 | connection_thread started
+2022-02-09 15:22:58 | sensor_reading_update STARTED
+2022-02-09 15:23:12 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 15:23:12 | encrypt.init SUCCESS
+2022-02-09 15:23:12 | Modules Initiation DONE...
+2022-02-09 15:23:12 | ===============================
+
+2022-02-09 15:23:12 | main RUNNING...
+2022-02-09 15:23:12 | connection_thread started
+2022-02-09 15:23:12 | sensor_reading_update STARTED
+2022-02-09 15:23:29 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "Lot or drum number", "value": "123"}, {"variable": "Pre operation n2 pallet pressure", "value": ""}, {"variable": "Pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "After operation n2 pallet pressure", "value": ""}, {"variable": "After operation 2nd n2 pallet pressure", "value": ""}, {"variable": "Vacuum pump", "value": ""}, {"variable": "Weighing balance serial no", "value": ""}, {"variable": "Empty 220L drum", "value": ""}, {"variable": "Filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "Amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.60308"}}
+2022-02-09 15:23:29 | error from callback <bound method connection_thread.on_message of <connection_thread(Thread-2, started 1961882688)>>: the JSON object must be str, bytes or bytearray, not list
+2022-02-09 15:23:29 | on_error. the JSON object must be str, bytes or bytearray, not list
+2022-02-09 15:25:39 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 15:25:39 | encrypt.init SUCCESS
+2022-02-09 15:25:40 | Modules Initiation DONE...
+2022-02-09 15:25:40 | ===============================
+
+2022-02-09 15:25:40 | main RUNNING...
+2022-02-09 15:25:40 | connection_thread started
+2022-02-09 15:25:40 | sensor_reading_update STARTED
+2022-02-09 15:25:43 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "Lot or drum number", "value": "123"}, {"variable": "Pre operation n2 pallet pressure", "value": ""}, {"variable": "Pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "After operation n2 pallet pressure", "value": ""}, {"variable": "After operation 2nd n2 pallet pressure", "value": ""}, {"variable": "Vacuum pump", "value": ""}, {"variable": "Weighing balance serial no", "value": ""}, {"variable": "Empty 220L drum", "value": ""}, {"variable": "Filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "Amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.60308"}}
+2022-02-09 15:25:43 | mysql_query (local, get) FAILED.
+(1054, "Unknown column 'name' in 'where clause'")
+2022-02-09 15:25:43 | Trying to generate report but no report data found.
+2022-02-09 15:28:10 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 15:28:10 | encrypt.init SUCCESS
+2022-02-09 15:28:10 | Modules Initiation DONE...
+2022-02-09 15:28:10 | ===============================
+
+2022-02-09 15:28:10 | main RUNNING...
+2022-02-09 15:28:10 | connection_thread started
+2022-02-09 15:28:10 | sensor_reading_update STARTED
+2022-02-09 15:28:15 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "Lot or drum number", "value": "123"}, {"variable": "Pre operation n2 pallet pressure", "value": ""}, {"variable": "Pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "After operation n2 pallet pressure", "value": ""}, {"variable": "After operation 2nd n2 pallet pressure", "value": ""}, {"variable": "Vacuum pump", "value": ""}, {"variable": "Weighing balance serial no", "value": ""}, {"variable": "Empty 220L drum", "value": ""}, {"variable": "Filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "Amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.60308"}}
+2022-02-09 15:28:15 | Trying to generate report but no report data found.
+2022-02-09 15:29:17 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 15:29:17 | encrypt.init SUCCESS
+2022-02-09 15:29:17 | Modules Initiation DONE...
+2022-02-09 15:29:17 | ===============================
+
+2022-02-09 15:29:17 | main RUNNING...
+2022-02-09 15:29:17 | connection_thread started
+2022-02-09 15:29:17 | sensor_reading_update STARTED
+2022-02-09 15:29:19 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "Lot or drum number", "value": "123"}, {"variable": "Pre operation n2 pallet pressure", "value": ""}, {"variable": "Pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "After operation n2 pallet pressure", "value": ""}, {"variable": "After operation 2nd n2 pallet pressure", "value": ""}, {"variable": "Vacuum pump", "value": ""}, {"variable": "Weighing balance serial no", "value": ""}, {"variable": "Empty 220L drum", "value": ""}, {"variable": "Filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "Amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.60308"}}
+2022-02-09 15:29:19 | Trying to generate report but no report data found.
+2022-02-09 15:30:11 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 15:30:11 | encrypt.init SUCCESS
+2022-02-09 15:30:11 | Modules Initiation DONE...
+2022-02-09 15:30:11 | ===============================
+
+2022-02-09 15:30:11 | main RUNNING...
+2022-02-09 15:30:11 | connection_thread started
+2022-02-09 15:30:11 | sensor_reading_update STARTED
+2022-02-09 15:30:12 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "Lot or drum number", "value": "123"}, {"variable": "Pre operation n2 pallet pressure", "value": ""}, {"variable": "Pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "After operation n2 pallet pressure", "value": ""}, {"variable": "After operation 2nd n2 pallet pressure", "value": ""}, {"variable": "Vacuum pump", "value": ""}, {"variable": "Weighing balance serial no", "value": ""}, {"variable": "Empty 220L drum", "value": ""}, {"variable": "Filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "Amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.60308"}}
+2022-02-09 15:30:12 | error from callback <bound method connection_thread.on_message of <connection_thread(Thread-2, started 1961882688)>>: list index out of range
+2022-02-09 15:30:12 | on_error. list index out of range
+2022-02-09 15:30:44 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "Lot or drum number", "value": "123"}, {"variable": "Pre operation n2 pallet pressure", "value": ""}, {"variable": "Pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "After operation n2 pallet pressure", "value": ""}, {"variable": "After operation 2nd n2 pallet pressure", "value": ""}, {"variable": "Vacuum pump", "value": ""}, {"variable": "Weighing balance serial no", "value": ""}, {"variable": "Empty 220L drum", "value": ""}, {"variable": "Filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "Amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.60308"}}
+2022-02-09 15:30:44 | error from callback <bound method connection_thread.on_message of <connection_thread(Thread-2, started 1961882688)>>: list index out of range
+2022-02-09 15:30:44 | on_error. list index out of range
+2022-02-09 15:32:42 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 15:32:42 | encrypt.init SUCCESS
+2022-02-09 15:32:42 | Modules Initiation DONE...
+2022-02-09 15:32:42 | ===============================
+
+2022-02-09 15:32:42 | main RUNNING...
+2022-02-09 15:32:42 | connection_thread started
+2022-02-09 15:32:42 | sensor_reading_update STARTED
+2022-02-09 15:32:44 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "Lot or drum number", "value": "123"}, {"variable": "Pre operation n2 pallet pressure", "value": ""}, {"variable": "Pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "After operation n2 pallet pressure", "value": ""}, {"variable": "After operation 2nd n2 pallet pressure", "value": ""}, {"variable": "Vacuum pump", "value": ""}, {"variable": "Weighing balance serial no", "value": ""}, {"variable": "Empty 220L drum", "value": ""}, {"variable": "Filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "Amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.60308"}}
+2022-02-09 15:32:45 | Report edited: pre_production_21Jan2022
+2022-02-09 15:41:38 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "Lot or drum number", "value": "123"}, {"variable": "Pre operation n2 pallet pressure", "value": ""}, {"variable": "Pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "After operation n2 pallet pressure", "value": ""}, {"variable": "After operation 2nd n2 pallet pressure", "value": ""}, {"variable": "Vacuum pump", "value": ""}, {"variable": "Weighing balance serial no", "value": ""}, {"variable": "Empty 220L drum", "value": ""}, {"variable": "Filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "Amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.60308"}}
+2022-02-09 15:41:38 | Report edited: pre_production_21Jan2022
+2022-02-09 15:42:07 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 15:42:07 | encrypt.init SUCCESS
+2022-02-09 15:42:07 | Modules Initiation DONE...
+2022-02-09 15:42:07 | ===============================
+
+2022-02-09 15:42:07 | main RUNNING...
+2022-02-09 15:42:07 | connection_thread started
+2022-02-09 15:42:07 | sensor_reading_update STARTED
+2022-02-09 15:42:13 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "Lot or drum number", "value": "123123123"}, {"variable": "Pre operation n2 pallet pressure", "value": ""}, {"variable": "Pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "After operation n2 pallet pressure", "value": ""}, {"variable": "After operation 2nd n2 pallet pressure", "value": ""}, {"variable": "Vacuum pump", "value": ""}, {"variable": "Weighing balance serial no", "value": ""}, {"variable": "Empty 220L drum", "value": ""}, {"variable": "Filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "Amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.60308"}}
+2022-02-09 15:42:13 | Report edited: pre_production_21Jan2022
+2022-02-09 15:43:26 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 15:43:26 | encrypt.init SUCCESS
+2022-02-09 15:43:27 | Modules Initiation DONE...
+2022-02-09 15:43:27 | ===============================
+
+2022-02-09 15:43:27 | main RUNNING...
+2022-02-09 15:43:27 | connection_thread started
+2022-02-09 15:43:27 | sensor_reading_update STARTED
+2022-02-09 15:43:46 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "lot or drum number", "value": "123123123"}, {"variable": "pre operation n2 pallet pressure", "value": ""}, {"variable": "pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "after operation n2 pallet pressure", "value": ""}, {"variable": "after operation 2nd n2 pallet pressure", "value": ""}, {"variable": "vacuum pump", "value": ""}, {"variable": "weighing balance serial no", "value": ""}, {"variable": "empty 220L drum", "value": ""}, {"variable": "filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.33748"}}
+2022-02-09 15:43:46 | Report edited: pre_production_21Jan2022
+2022-02-09 15:45:25 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 15:45:25 | encrypt.init SUCCESS
+2022-02-09 15:45:25 | Modules Initiation DONE...
+2022-02-09 15:45:25 | ===============================
+
+2022-02-09 15:45:25 | main RUNNING...
+2022-02-09 15:45:25 | connection_thread started
+2022-02-09 15:45:25 | sensor_reading_update STARTED
+2022-02-09 15:45:40 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "lot or drum number", "value": "123123123"}, {"variable": "pre operation n2 pallet pressure", "value": ""}, {"variable": "pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "after operation n2 pallet pressure", "value": ""}, {"variable": "after operation 2nd n2 pallet pressure", "value": ""}, {"variable": "vacuum pump", "value": ""}, {"variable": "weighing balance serial no", "value": ""}, {"variable": "empty 220L drum", "value": ""}, {"variable": "filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.33924"}}
+2022-02-09 15:45:40 | Report edited: pre_production_21Jan2022
+2022-02-09 15:46:24 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 15:46:24 | encrypt.init SUCCESS
+2022-02-09 15:46:25 | Modules Initiation DONE...
+2022-02-09 15:46:25 | ===============================
+
+2022-02-09 15:46:25 | main RUNNING...
+2022-02-09 15:46:25 | connection_thread started
+2022-02-09 15:46:25 | sensor_reading_update STARTED
+2022-02-09 15:46:36 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "lot or drum number", "value": "876574"}, {"variable": "pre operation n2 pallet pressure", "value": ""}, {"variable": "pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "after operation n2 pallet pressure", "value": ""}, {"variable": "after operation 2nd n2 pallet pressure", "value": ""}, {"variable": "vacuum pump", "value": ""}, {"variable": "weighing balance serial no", "value": ""}, {"variable": "empty 220L drum", "value": ""}, {"variable": "filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.34020"}}
+2022-02-09 15:46:36 | Report edited: pre_production_21Jan2022
+2022-02-09 15:47:26 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 15:47:26 | encrypt.init SUCCESS
+2022-02-09 15:47:26 | Modules Initiation DONE...
+2022-02-09 15:47:26 | ===============================
+
+2022-02-09 15:47:26 | main RUNNING...
+2022-02-09 15:47:26 | connection_thread started
+2022-02-09 15:47:26 | sensor_reading_update STARTED
+2022-02-09 15:47:41 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "lot or drum number", "value": "244136"}, {"variable": "pre operation n2 pallet pressure", "value": ""}, {"variable": "pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "after operation n2 pallet pressure", "value": ""}, {"variable": "after operation 2nd n2 pallet pressure", "value": ""}, {"variable": "vacuum pump", "value": ""}, {"variable": "weighing balance serial no", "value": ""}, {"variable": "empty 220L drum", "value": ""}, {"variable": "filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.34122"}}
+2022-02-09 15:47:41 | Report edited: pre_production_21Jan2022
+2022-02-09 15:57:24 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 15:57:25 | encrypt.init SUCCESS
+2022-02-09 15:57:25 | Modules Initiation DONE...
+2022-02-09 15:57:25 | ===============================
+
+2022-02-09 15:57:25 | main RUNNING...
+2022-02-09 15:57:25 | connection_thread started
+2022-02-09 15:57:25 | sensor_reading_update STARTED
+2022-02-09 15:58:02 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "lot or drum number", "value": "33333"}, {"variable": "pre operation n2 pallet pressure", "value": ""}, {"variable": "pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "after operation n2 pallet pressure", "value": ""}, {"variable": "after operation 2nd n2 pallet pressure", "value": ""}, {"variable": "vacuum pump", "value": ""}, {"variable": "weighing balance serial no", "value": ""}, {"variable": "empty 220L drum", "value": ""}, {"variable": "filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.34920"}}
+2022-02-09 15:58:02 | Report edited: pre_production_21Jan2022
+2022-02-09 16:00:55 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "lot or drum number", "value": "33333"}, {"variable": "pre operation n2 pallet pressure", "value": ""}, {"variable": "pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "after operation n2 pallet pressure", "value": ""}, {"variable": "after operation 2nd n2 pallet pressure", "value": ""}, {"variable": "vacuum pump", "value": ""}, {"variable": "weighing balance serial no", "value": ""}, {"variable": "empty 220L drum", "value": ""}, {"variable": "filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.34920"}}
+2022-02-09 16:00:55 | Report edited: pre_production_21Jan2022
+2022-02-09 16:03:30 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 16:03:30 | encrypt.init SUCCESS
+2022-02-09 16:03:30 | Modules Initiation DONE...
+2022-02-09 16:03:30 | ===============================
+
+2022-02-09 16:03:30 | main RUNNING...
+2022-02-09 16:03:30 | connection_thread started
+2022-02-09 16:03:30 | sensor_reading_update STARTED
+2022-02-09 16:03:52 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "lot or drum number", "value": "11"}, {"variable": "pre operation n2 pallet pressure", "value": "22"}, {"variable": "pre operation 2nd n2 pallet pressure", "value": "33"}, {"variable": "after operation n2 pallet pressure", "value": "44"}, {"variable": "after operation 2nd n2 pallet pressure", "value": "55"}, {"variable": "vacuum pump", "value": "66"}, {"variable": "weighing balance serial no", "value": "77"}, {"variable": "empty 220L drum", "value": "88"}, {"variable": "filled 220L drum with HTPB, Treated", "value": "99"}, {"variable": "amount of HTPB, Treated collected", "value": "00"}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.35430"}}
+2022-02-09 16:03:52 | Report edited: pre_production_21Jan2022
+2022-02-09 16:05:07 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 16:05:07 | encrypt.init SUCCESS
+2022-02-09 16:05:07 | Modules Initiation DONE...
+2022-02-09 16:05:07 | ===============================
+
+2022-02-09 16:05:07 | main RUNNING...
+2022-02-09 16:05:07 | connection_thread started
+2022-02-09 16:05:07 | sensor_reading_update STARTED
+2022-02-09 16:05:10 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "lot or drum number", "value": "11"}, {"variable": "pre operation n2 pallet pressure", "value": "22"}, {"variable": "pre operation 2nd n2 pallet pressure", "value": "33"}, {"variable": "after operation n2 pallet pressure", "value": "44"}, {"variable": "after operation 2nd n2 pallet pressure", "value": "55"}, {"variable": "vacuum pump", "value": "66"}, {"variable": "weighing balance serial no", "value": "77"}, {"variable": "empty 220L drum", "value": "88"}, {"variable": "filled 220L drum with HTPB, Treated", "value": "99"}, {"variable": "amount of HTPB, Treated collected", "value": "00"}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.35430"}}
+2022-02-09 16:05:10 | Report edited: pre_production_21Jan2022
+2022-02-09 16:06:59 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 16:06:59 | encrypt.init SUCCESS
+2022-02-09 16:06:59 | Modules Initiation DONE...
+2022-02-09 16:06:59 | ===============================
+
+2022-02-09 16:06:59 | main RUNNING...
+2022-02-09 16:06:59 | connection_thread started
+2022-02-09 16:06:59 | sensor_reading_update STARTED
+2022-02-09 16:07:01 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "lot or drum number", "value": "11"}, {"variable": "pre operation n2 pallet pressure", "value": "22"}, {"variable": "pre operation 2nd n2 pallet pressure", "value": "33"}, {"variable": "after operation n2 pallet pressure", "value": "44"}, {"variable": "after operation 2nd n2 pallet pressure", "value": "55"}, {"variable": "vacuum pump", "value": "66"}, {"variable": "weighing balance serial no", "value": "77"}, {"variable": "empty 220L drum", "value": "88"}, {"variable": "filled 220L drum with HTPB, Treated", "value": "99"}, {"variable": "amount of HTPB, Treated collected", "value": "00"}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.35430"}}
+2022-02-09 16:07:02 | Report edited: pre_production_21Jan2022
+2022-02-09 16:09:29 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 16:09:30 | encrypt.init SUCCESS
+2022-02-09 16:09:30 | Modules Initiation DONE...
+2022-02-09 16:09:30 | ===============================
+
+2022-02-09 16:09:30 | main RUNNING...
+2022-02-09 16:09:30 | connection_thread started
+2022-02-09 16:09:30 | sensor_reading_update STARTED
+2022-02-09 16:52:46 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 16:52:46 | encrypt.init SUCCESS
+2022-02-09 16:52:46 | Modules Initiation DONE...
+2022-02-09 16:52:46 | ===============================
+
+2022-02-09 16:52:46 | main RUNNING...
+2022-02-09 16:52:46 | connection_thread started
+2022-02-09 16:52:46 | sensor_reading_update STARTED
+2022-02-09 16:52:46 | on_error. [Errno 111] Connection refused
+2022-02-09 16:52:46 | on_close. None. None
+2022-02-09 16:52:46 | sensor_reading_update FAILED. Connection is already closed.
+2022-02-09 16:52:52 | sensor_reading_update FAILED. Connection is already closed.
+2022-02-09 16:55:22 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 16:55:22 | encrypt.init SUCCESS
+2022-02-09 16:55:23 | Modules Initiation DONE...
+2022-02-09 16:55:23 | ===============================
+
+2022-02-09 16:55:23 | main RUNNING...
+2022-02-09 16:55:23 | connection_thread started
+2022-02-09 16:55:23 | sensor_reading_update STARTED
+2022-02-09 16:55:23 | on_error. [Errno 111] Connection refused
+2022-02-09 16:55:23 | on_close. None. None
+2022-02-09 16:55:23 | sensor_reading_update FAILED. Connection is already closed.
+2022-02-09 16:55:28 | sensor_reading_update FAILED. Connection is already closed.
+2022-02-09 17:01:12 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "lot or drum number", "value": "123123"}, {"variable": "pre operation n2 pallet pressure", "value": ""}, {"variable": "pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "after operation n2 pallet pressure", "value": ""}, {"variable": "after operation 2nd n2 pallet pressure", "value": ""}, {"variable": "vacuum pump", "value": ""}, {"variable": "weighing balance serial no", "value": ""}, {"variable": "empty 220L drum", "value": ""}, {"variable": "filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.54048"}}
+2022-02-09 17:01:12 | Report edited: pre_production_21Jan2022
+2022-02-09 17:12:58 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 17:12:59 | encrypt.init SUCCESS
+2022-02-09 17:12:59 | Modules Initiation DONE...
+2022-02-09 17:12:59 | ===============================
+
+2022-02-09 17:12:59 | main RUNNING...
+2022-02-09 17:12:59 | connection_thread started
+2022-02-09 17:12:59 | sensor_reading_update STARTED
+2022-02-09 17:13:23 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "lot or drum number", "value": "4345"}, {"variable": "pre operation n2 pallet pressure", "value": "345"}, {"variable": "pre operation 2nd n2 pallet pressure", "value": "1"}, {"variable": "after operation n2 pallet pressure", "value": "2"}, {"variable": "after operation 2nd n2 pallet pressure", "value": "3"}, {"variable": "vacuum pump", "value": "4"}, {"variable": "weighing balance serial no", "value": "5"}, {"variable": "empty 220L drum", "value": "6"}, {"variable": "filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "amount of HTPB, Treated collected", "value": "7"}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.56424"}}
+2022-02-09 17:13:23 | Report edited: pre_production_21Jan2022
+2022-02-09 17:13:24 | error from callback <bound method connection_thread.on_message of <connection_thread(Thread-2, started 1961882688)>>: Object of type set is not JSON serializable
+2022-02-09 17:13:24 | on_error. Object of type set is not JSON serializable
+2022-02-09 17:14:22 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 17:14:22 | encrypt.init SUCCESS
+2022-02-09 17:14:23 | Modules Initiation DONE...
+2022-02-09 17:14:23 | ===============================
+
+2022-02-09 17:14:23 | main RUNNING...
+2022-02-09 17:14:23 | connection_thread started
+2022-02-09 17:14:23 | sensor_reading_update STARTED
+2022-02-09 17:14:47 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "lot or drum number", "value": "123"}, {"variable": "pre operation n2 pallet pressure", "value": ""}, {"variable": "pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "after operation n2 pallet pressure", "value": ""}, {"variable": "after operation 2nd n2 pallet pressure", "value": ""}, {"variable": "vacuum pump", "value": ""}, {"variable": "weighing balance serial no", "value": ""}, {"variable": "empty 220L drum", "value": ""}, {"variable": "filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.56726"}}
+2022-02-09 17:14:47 | Report edited: pre_production_21Jan2022
+2022-02-09 17:14:47 | error from callback <bound method connection_thread.on_message of <connection_thread(Thread-2, started 1961882688)>>: Object of type set is not JSON serializable
+2022-02-09 17:14:47 | on_error. Object of type set is not JSON serializable
+2022-02-09 17:15:21 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 17:15:21 | encrypt.init SUCCESS
+2022-02-09 17:15:21 | Modules Initiation DONE...
+2022-02-09 17:15:21 | ===============================
+
+2022-02-09 17:15:21 | main RUNNING...
+2022-02-09 17:15:21 | connection_thread started
+2022-02-09 17:15:21 | sensor_reading_update STARTED
+2022-02-09 17:15:34 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "lot or drum number", "value": "2323232"}, {"variable": "pre operation n2 pallet pressure", "value": ""}, {"variable": "pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "after operation n2 pallet pressure", "value": ""}, {"variable": "after operation 2nd n2 pallet pressure", "value": ""}, {"variable": "vacuum pump", "value": ""}, {"variable": "weighing balance serial no", "value": ""}, {"variable": "empty 220L drum", "value": ""}, {"variable": "filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.56920"}}
+2022-02-09 17:15:34 | Report edited: pre_production_21Jan2022
+2022-02-09 17:18:58 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "lot or drum number", "value": "sdcgf"}, {"variable": "pre operation n2 pallet pressure", "value": ""}, {"variable": "pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "after operation n2 pallet pressure", "value": ""}, {"variable": "after operation 2nd n2 pallet pressure", "value": ""}, {"variable": "vacuum pump", "value": ""}, {"variable": "weighing balance serial no", "value": ""}, {"variable": "empty 220L drum", "value": ""}, {"variable": "filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.57602"}}
+2022-02-09 17:18:58 | Report edited: pre_production_21Jan2022
+2022-02-09 17:21:11 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "lot or drum number", "value": "asdf"}, {"variable": "pre operation n2 pallet pressure", "value": ""}, {"variable": "pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "after operation n2 pallet pressure", "value": ""}, {"variable": "after operation 2nd n2 pallet pressure", "value": ""}, {"variable": "vacuum pump", "value": ""}, {"variable": "weighing balance serial no", "value": ""}, {"variable": "empty 220L drum", "value": ""}, {"variable": "filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.58056"}}
+2022-02-09 17:21:11 | Report edited: pre_production_21Jan2022
+2022-02-09 17:21:21 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "lot or drum number", "value": "123"}, {"variable": "pre operation n2 pallet pressure", "value": ""}, {"variable": "pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "after operation n2 pallet pressure", "value": ""}, {"variable": "after operation 2nd n2 pallet pressure", "value": ""}, {"variable": "vacuum pump", "value": ""}, {"variable": "weighing balance serial no", "value": ""}, {"variable": "empty 220L drum", "value": ""}, {"variable": "filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.58056"}}
+2022-02-09 17:21:21 | Report edited: pre_production_21Jan2022
+2022-02-09 17:23:29 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-09 17:23:29 | encrypt.init SUCCESS
+2022-02-09 17:23:29 | Modules Initiation DONE...
+2022-02-09 17:23:29 | ===============================
+
+2022-02-09 17:23:29 | main RUNNING...
+2022-02-09 17:23:29 | connection_thread started
+2022-02-09 17:23:29 | sensor_reading_update STARTED
+2022-02-09 17:23:41 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "lot or drum number", "value": "asdcfg"}, {"variable": "pre operation n2 pallet pressure", "value": ""}, {"variable": "pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "after operation n2 pallet pressure", "value": ""}, {"variable": "after operation 2nd n2 pallet pressure", "value": ""}, {"variable": "vacuum pump", "value": ""}, {"variable": "weighing balance serial no", "value": ""}, {"variable": "empty 220L drum", "value": ""}, {"variable": "filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.58578"}}
+2022-02-09 17:23:41 | Report edited: pre_production_21Jan2022
+2022-02-09 17:23:46 | <FROM UI>: ---> {"data": {"message": {"variable_list": [{"variable": "edit report name", "value": "pre_production_21Jan2022"}, {"variable": "lot or drum number", "value": "123"}, {"variable": "pre operation n2 pallet pressure", "value": ""}, {"variable": "pre operation 2nd n2 pallet pressure", "value": ""}, {"variable": "after operation n2 pallet pressure", "value": ""}, {"variable": "after operation 2nd n2 pallet pressure", "value": ""}, {"variable": "vacuum pump", "value": ""}, {"variable": "weighing balance serial no", "value": ""}, {"variable": "empty 220L drum", "value": ""}, {"variable": "filled 220L drum with HTPB, Treated", "value": ""}, {"variable": "amount of HTPB, Treated collected", "value": ""}]}, "message_type": "edit report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.58578"}}
+2022-02-09 17:23:47 | Report edited: pre_production_21Jan2022

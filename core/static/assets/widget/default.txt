@@ -1,0 +1,1 @@
+[{"gs_x":"0","gs_y":"0","gs_w":"64","gs_h":"58","widget_type":"table","widget_name":""}]

@@ -1,0 +1,44 @@
+/home/pi/monitoring_sys/python/modules/buzzer.py:7: RuntimeWarning: This channel is already in use, continuing anyway.  Use GPIO.setwarnings(False) to disable warnings.
+  GPIO.setup(buzzer_pin, GPIO.OUT)
+2021-11-30 09:04:01 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2021-11-30 09:04:01 | encrypt.init SUCCESS
+2021-11-30 09:04:02 | Modules Initiation DONE...
+2021-11-30 09:04:02 | ===============================
+
+2021-11-30 09:04:02 | main RUNNING...
+2021-11-30 09:04:02 | connection_thread started
+Exception ignored in: <module 'threading' from '/usr/lib/python3.7/threading.py'>
+Traceback (most recent call last):
+  File "/usr/lib/python3.7/threading.py", line 1281, in _shutdown
+    t.join()
+  File "/usr/lib/python3.7/threading.py", line 1032, in join
+    self._wait_for_tstate_lock()
+  File "/usr/lib/python3.7/threading.py", line 1048, in _wait_for_tstate_lock
+    elif lock.acquire(block, timeout):
+KeyboardInterrupt
+/home/pi/monitoring_sys/python/modules/buzzer.py:7: RuntimeWarning: This channel is already in use, continuing anyway.  Use GPIO.setwarnings(False) to disable warnings.
+  GPIO.setup(buzzer_pin, GPIO.OUT)
+2021-11-30 09:04:08 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2021-11-30 09:04:09 | encrypt.init SUCCESS
+2021-11-30 09:04:09 | Modules Initiation DONE...
+2021-11-30 09:04:09 | ===============================
+
+2021-11-30 09:04:09 | main RUNNING...
+2021-11-30 09:04:09 | connection_thread started
+/home/pi/monitoring_sys/python/modules/buzzer.py:7: RuntimeWarning: This channel is already in use, continuing anyway.  Use GPIO.setwarnings(False) to disable warnings.
+  GPIO.setup(buzzer_pin, GPIO.OUT)
+2021-11-30 09:04:17 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2021-11-30 09:04:17 | encrypt.init SUCCESS
+2021-11-30 09:04:18 | Modules Initiation DONE...
+2021-11-30 09:04:18 | ===============================
+
+2021-11-30 09:04:18 | sessions_manager RUNNING...
+2021-11-30 09:04:18 | connection_thread started
+created directory: /home/pi/monitoring_sys/python/logs/sessions_manager
+2021-11-30 09:08:47 | <SESSIONS MANAGER>: ---> {"data": {"message_type": "sessions", "username": "guest", "ip_address": "127.0.0.1.41812", "user_role": "sessions_manager"}}
+2021-11-30 09:09:07 | <SESSIONS MANAGER>: ---> {"data": {"message_type": "sessions", "username": "guest", "ip_address": "127.0.0.1.48266", "user_role": "sessions_manager"}}
+2021-11-30 09:10:45 | <SESSIONS MANAGER>: ---> {"data": {"message_type": "sessions", "username": "guest", "ip_address": "127.0.0.1.49250", "user_role": "sessions_manager"}}
+2021-11-30 09:10:55 | <SESSIONS MANAGER>: ---> {"data": {"message_type": "sessions", "username": "guest", "ip_address": "127.0.0.1.49350", "user_role": "sessions_manager"}}
+2021-11-30 09:13:06 | <SESSIONS MANAGER>: ---> {"data": {"message_type": "sessions", "username": "guest", "ip_address": "127.0.0.1.50682", "user_role": "sessions_manager"}}
+2021-11-30 09:13:30 | <FROM UI>: ---> {"data": {"message": "pre production", "message_type": "process select", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.50682"}}
+2021-11-30 09:13:38 | <FROM UI>: ---> {"data": {"message": "production", "message_type": "process select", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.50682"}}

@@ -1,0 +1,207 @@
+<style>
+    .chart-button-container{
+        position: absolute;
+        right: 25px;
+        top: 45px;
+    }
+</style>
+
+<div class='widget-header'></div>
+
+<div class="chart_filter_container">
+    <input type="hidden" class="date-range-picker-start-date" value="">
+    <input type="hidden" class="date-range-picker-end-date" value="">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+        </div>
+        <input type="text" class="date-range-picker form-control">
+    </div>
+    <div class="input-group mb-3">
+        <select type="text" class="form-control tag-select custom-select" placeholder="Select Tag"></select>
+    </div>
+    <button class="btn btn-block btn-primary confirm-chart-filter">Apply Filter</button>
+</div>
+<div class="chart" name='line chart' style='height: 553px'>
+    <div class="chart-loading-container">
+        <div class="gif-container">
+            <img src="/static/assets/img/loading.gif" alt="loading">
+        </div>
+    </div>
+    <div class="chart-button-container">
+        <button class="btn btn-sm btn-primary chart-pan"><i class="fas fa-arrows-alt"></i></button>
+        <button class="btn btn-sm btn-secondary chart-zoom"><i class="fas fa-search-plus"></i></button>
+        <button class="btn btn-sm btn-secondary chart-reset"><i class="fas fa-redo"></i></button>
+    </div>
+    <canvas id="chart-widget" class="chart-canvas"></canvas>
+</div>
+
+
+
+<script>
+    
+    $('.tag-select').ready(function(){
+        $.ajax({
+            url: 'tag_manager/',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                mode: 'get all',
+                tag: 'all',
+            },
+            success: function(data){
+                if (data.success){
+                    console.log('get_tag_list SUCCESS')
+                    console.log(data.tag_list)
+                    $.each(data.tag_list, function(index, value){
+                        value.tag_id
+                        $row = $('<option value='+value.tag_id+'>'+value.tag_id+'</option>')
+                        $('.tag-select').append($row)
+                    })
+                }
+                else {
+                    console.log('get_tag_list FAILED')
+                }
+            },
+            fail: function(data){
+                console.log('get_tag_list FAILED')
+            }
+        })
+    })
+
+
+    $('.chart-canvas').ready(function(){
+        get_tag_reading($('.chart-canvas').data('chart'))
+    })
+    
+
+    $('.confirm-chart-filter').click(function(){
+        get_tag_reading($('.chart-canvas').data('chart'))
+    })
+    
+
+    $('.date-range-picker').on('apply.daterangepicker', function(ev, picker){
+        $('.date-range-picker-start-date').val(picker.startDate.format('YYYY-MM-DD HH:mm'))
+        $('.date-range-picker-end-date').val(picker.endDate.format('YYYY-MM-DD HH:mm'))
+    })
+    
+
+    $('.chart-pan').click(function(){
+        var chart = $('.chart-canvas').data('chart')
+        $(this).toggleClass('btn-secondary btn-primary')
+        $(this).siblings().removeClass('btn-primary btn-secondary').addClass('btn-secondary')
+        chart_disable_zoom(chart)
+        if (chart.options.plugins.zoom.pan.enabled){
+            chart_disable_pan(chart)
+        }
+        else {
+            chart_enable_pan(chart)
+        }
+    })
+    $('.chart-zoom').click(function(){
+        var chart = $('.chart-canvas').data('chart')
+        $(this).toggleClass('btn-secondary btn-primary')
+        $(this).siblings().removeClass('btn-primary btn-secondary').addClass('btn-secondary')
+        chart_disable_pan(chart)
+        if (chart.options.plugins.zoom.zoom.drag.enabled){
+            chart_disable_zoom(chart)
+        }
+        else {
+            chart_enable_zoom(chart)
+        }
+    })
+    $('.chart-reset').click(function(){
+        var chart = $('.chart-canvas').data('chart')
+        chart.resetZoom();
+    })
+
+
+
+// ==========================================================================
+// functions 
+// ==========================================================================
+
+    function get_tag_reading(chart){
+        console.log('tag_id',$('.tag-select').val())
+        console.log('start_date',$('.date-range-picker-start-date').val())
+        console.log('end_date',$('.date-range-picker-end-date').val())
+        data = {
+                tag_id: $('.tag-select').val(),
+                start_date: $('.date-range-picker-start-date').val(),
+                end_date: $('.date-range-picker-end-date').val(),
+            },
+        ajax_request('tag_manager/', 'GET', 'reading chart', data, false, true).done((data)=>{
+            if (data.success){
+                chart = $('.chart-canvas').data('chart')
+                if (data.reading.length != 0){
+                    chart.data.labels = data.timestamp
+                    chart.data.datasets[0].data = data.reading
+                }
+                else {
+                    chart.data.labels = []
+                    chart.data.datasets[0].data = []
+                }
+                chart.options.plugins.title.text = "Tag Reading " + data.tag_id
+                chart.update()
+            }
+        })
+        // $.ajax({
+        //     url: 'tag_manager/',
+        //     type: 'GET',
+        //     dataType: 'json',
+        //     data: {
+        //         mode: 'reading chart',
+        //         tag_id: $('.tag-select').val(),
+        //         start_date: $('.date-range-picker-start-date').val(),
+        //         end_date: $('.date-range-picker-end-date').val(),
+        //     },
+        //     beforeSend: function(){
+        //         $('.chart-loading-container').show()
+        //     },
+        //     success: function(data){
+        //         console.log('Success:',data.success,'\nMessage:',data.message)
+
+        //         if (data.success){
+        //             chart = $('.chart-canvas').data('chart')
+        //             if (data.reading.length != 0){
+        //                 chart.data.labels = data.timestamp
+        //                 chart.data.datasets[0].data = data.reading
+        //             }
+        //             else {
+        //                 chart.data.labels = []
+        //                 chart.data.datasets[0].data = []
+        //             }
+        //             chart.options.plugins.title.text = "Tag Reading " + data.tag_id
+        //             chart.update()
+        //         }
+        //     },
+        //     fail: function(data){
+        //         console.log('get_tag_list FAILED')
+        //     },
+        //     complete: function() {
+        //         $('.chart-loading-container').hide()
+        //     },
+        // })
+    }    
+    
+    function chart_enable_zoom(chart){
+        chart.options.plugins.zoom.zoom.drag.enabled = true
+        console.log('zoom enabled')
+        chart.update()
+    }
+    function chart_disable_zoom(chart){
+        chart.options.plugins.zoom.zoom.drag.enabled = false
+        console.log('zoom disabled')
+        chart.update()
+    }
+    function chart_enable_pan(chart){
+        chart.options.plugins.zoom.pan.enabled = true
+        console.log('pan enabled')
+        chart.update()
+    }
+    function chart_disable_pan(chart){
+        chart.options.plugins.zoom.pan.enabled = false
+        console.log('pan disabled')
+        chart.update()
+    }
+</script>

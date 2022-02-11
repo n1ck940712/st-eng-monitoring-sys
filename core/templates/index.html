@@ -1,0 +1,97 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+<style type="text/css">
+  .grid-stack { background: #FAFAD2; }
+  .grid-stack-item-content { background-color: #18BC9C; }
+  .input-group>.input-group-prepend {
+    flex: 0 0 25%;
+  }
+  .input-group>.input-group-append {
+    flex: 0 0 10%;
+  }
+  .input-group .input-group-text {
+    width: 100%;
+  }
+</style>
+
+
+
+{% block content %}
+
+    <!-- Header -->
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+      <div class="container-fluid">
+        <div class="header-body">
+        </div>
+      </div>
+    </div>
+    <!-- Header end -->
+
+    <!-- content body -->
+    <div class="container-fluid mt--7">
+      <div class="row">
+        <div class="col-xl-12 mb-5 mb-xl-0">
+          <div class="card bg-gradient-default shadow grid-stack-card">
+            <div class="card-header bg-transparent">
+              <!-- content card title-->
+              <div class="row align-items-center">
+                <div class="col dashboard-header">
+                  <h6 class="text-uppercase text-light ls-1 mb-1">Dashboard</h6>
+                  <div class="datetime">
+                    <span class="text-light" id="date">{{ date }}</span>
+                    <span class="text-light" id="time">{{ time }}</span>
+                  </div>
+                  <!-- <h2 class="text-white mb-0">Test Skid Layout</h2> -->
+                </div>
+              </div>
+              <!-- content card title end -->
+              {% comment %} {% ifequal request.user.user_details.role "Super Admin" %}
+              <!-- edit widget  -->
+              <button type="button" class="btn btn-primary edit-widget">
+                <i class="fas fa-plus-circle"></i><span>Edit</span>
+              </button>
+              <button type="button" class="btn btn-success confirm-edit-widget" style="display:none;">
+                <i class="fas fa-plus-circle"></i><span>Confirm Edit</span>
+              </button>
+              <!-- edit widget end -->
+              <!--add widget and trigger modal -->
+              <button type="button" class="btn btn-success add_widget_open_modal" data-toggle="modal" data-target="#add_widget_modal" style="display:none;">
+                <i class="fas fa-plus-circle"></i><span>Add Widget</span>
+              </button>
+              <!-- add widget and trigger modal end -->
+              <!-- remove widget -->
+              <button type="button" class="btn btn-danger remove-widget" id="trash" style="display:none;">
+                <i class="fas fa-trash"></i><span>Drop here to remove</span>
+              </button>
+              <!-- remove widget end -->
+              {% endifequal %} {% endcomment %}
+
+            </div>
+            <!-- gridstack grid/canvas -->
+            <div class="grid-stack grid-stack-64"></div>
+            <!-- <div class="grid-stack"></div> -->
+            <!-- gridstack grid/canvas end -->
+          </div>
+        </div>
+      </div>
+
+      
+      {% include "modals.html" %}
+      {% comment %} {% include "includes/footer.html" %} {% endcomment %}
+
+    </div>
+    <!-- content body end -->
+
+{% endblock content %}
+
+
+
+<!-- Specific JS goes HERE --> 
+
+{% block javascripts %}
+<script src="/static/assets/js/page-index.js"></script>
+{% endblock javascripts %}

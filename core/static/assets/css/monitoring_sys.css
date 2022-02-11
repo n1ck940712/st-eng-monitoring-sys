@@ -1,0 +1,160 @@
+/* idle  */
+
+.idle-message{
+    padding: 100px 0px 0px 0px;
+    font-size: 50px;
+    text-align: center;
+}
+
+.idle-button-container{
+    padding: 50px 0px 0px 0px;
+    justify-content: center;
+    display: flex;
+}
+
+.post-production-message{
+    padding: 100px 0px 0px 0px;
+    font-size: 50px;
+    text-align: center;
+}
+
+.post-production-button-container{
+    padding: 50px 0px 0px 0px;
+    justify-content: center;
+    display: flex;
+}
+
+.btn-xlg {
+    padding: 18px 28px;
+    font-size: 22px;
+    line-height: normal;
+    -webkit-border-radius: 8px;
+       -moz-border-radius: 8px;
+            border-radius: 8px;
+}
+
+.modal-body {
+    padding: 90px 30px 90px 30px;
+    font-size: 40px;
+    text-align: center;
+}
+#report-edit-modal .modal-body {
+    padding: 90px 30px 90px 30px;
+    font-size: 40px;
+    text-align: center;
+}
+.modal-dialog{
+    margin-top: 20vh;
+}
+#report-edit-modal .modal-dialog{
+    margin-top: 5vh;
+}
+#report-preview-modal .modal-body {
+    padding: 5px;
+    height: 100vh;
+    text-align: center;
+}
+#report-preview-modal .modal-dialog{
+    margin-top: 5vh;
+}
+#report-preview-modal .modal-content{
+    max-height: 90vh;
+}
+#report-edit-modal .modal-content{
+    max-height: 90vh;
+}
+
+.modal-body p{
+    padding: 80px 30px 80px 30px;
+    font-size: 50px;
+    text-align: center;
+}
+
+.modal-footer{
+    justify-content: center;
+}
+
+#data-input-modal .input-group-text {
+    font-size: 22px;
+}
+#data-input-modal .form-control {
+    font-size: 22px;
+}
+
+.grid-stack-item{
+    display: none;
+}
+
+.grid-stack-card { 
+ min-height: 92vh;
+}
+
+/* .report-table-checkbox {
+
+} */
+.dataTables_scrollBody{
+    height: 50vh !important;
+}
+.report-table-select-col{
+    width: 0px;
+}
+
+.report-table-footer{
+    margin: 20px 20px 20px 20px;
+}
+
+/* .table-responsive { overflow-x: hidden; } */
+
+#progress-description{
+    margin-bottom: 16px;
+    height: 77%;
+    overflow: auto;
+    resize: none;
+}
+
+#data-input-modal .modal-body-error {
+    color: #e75959;
+    font-size: 1rem;
+}
+
+#select-process-modal{
+    z-index: 4000;
+}
+#deviation-modal{
+    z-index: 6000;
+}
+#data-input-modal{
+    z-index: 6000;
+}
+#confirmation-modal{
+    z-index: 7000;
+}
+#prompt-modal{
+    z-index: 9000;
+}
+
+#sidenav-main .input-group-text {
+    width: 90px;
+}
+
+#sidenav-main #current_pressure:read-only, #current_temp:read-only, #current_flow:read-only{
+    background: white;
+    color: black;
+}
+
+#pdf-preview-container {
+    height: 100%;
+}
+
+a.link-disabled {
+    pointer-events: none;
+    cursor: default;
+    color: rgb(255, 0, 0) !important;
+}
+
+.input-container .input-group-prepend .input-group-text {
+    min-width: 200px;
+}
+.input-container .input-group-append .input-group-text {
+    min-width: 70px;
+}

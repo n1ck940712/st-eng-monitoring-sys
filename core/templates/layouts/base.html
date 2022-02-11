@@ -1,0 +1,63 @@
+<!--
+
+=========================================================
+* FloSkid Dashboard - v1.0.0
+=========================================================-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <title>
+    FloSkid - {% block title %} Admin Panel {% endblock %} | Flotech Controls
+  </title>
+
+  {% include "includes/stylesheets.html" %}
+  
+
+  <!-- Specific CSS goes HERE -->
+  {% block stylesheets %}{% endblock stylesheets %}
+
+</head>
+
+<body class="">
+  {% csrf_token %}
+  
+  <div class="loading-overlay">
+    <div class="gif-container">
+      <img src="{% static '/assets/img/loading.gif' %}" alt="loading">
+    </div>
+  </div>
+  <input type="text" id="user-role" hidden value="{{ request.user.user_details.role }}">
+  {% include "includes/sidenav.html" %}
+
+  <div class="main-content">
+
+    <!-- to display drop down alert message -->
+    <div class="alert-container">
+      <div class="alert" role="alert"></div>
+    </div>
+    {% comment %} {% include "includes/navigation.html" %} {% endcomment %}
+
+    {% block content %}{% endblock content %}
+
+  </div>
+
+  <script> 
+    var sessions_username = '{{request.user.username}}'
+  </script>
+  {% include "includes/scripts.html" %}
+
+  <!-- Specific JS goes HERE --> 
+  {% block javascripts %}
+  
+  {% endblock javascripts %}
+
+</body>
+
+</html>

@@ -1,0 +1,202 @@
+<!-- add widget Modal -->
+      <div class="modal" id="add_widget_modal" tabindex="-1" role="dialog" aria-labelledby="add_widget_modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="add_widget_modal">Add Widget</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- choose widget -->
+              <form id="add-widget-form" >
+                <div class='add_widget_form_main'>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text text-dark">Widget Name</label>
+                    </div>
+                    <input type="text" class="form-control" id="add_widget_name" placeholder="Widget Name" required>
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text text-dark">Widget Type</label>
+                    </div>
+                    <select class="custom-select" id="add-widget-type" required>
+                      <option hidden selected value disabled>--Select--</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="input-group mb-3 add_widget_form_sub"></div>
+              </form>
+              <!-- choose widget end -->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary" form="add-widget-form">Add Widget</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- add widget Modal end -->
+      
+
+
+      <!-- ========================================================================================================================================================== -->
+      <!-- monitoring sys -->
+      <!-- ========================================================================================================================================================== -->
+
+      <!-- start process modal -->
+      <div class="modal" id="select-process-modal" tabindex="-1" role="dialog" aria-labelledby="select-process-modal-title" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="select-process-modal-title">Start <span class="process-name">[pass process name here]</span>?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                Confirm to start <span class="process-name">[pass process name here]</span>?
+                <!-- data input form -->
+                <!-- data input form end -->
+            </div>
+            <div class="modal-footer">
+                <form id="select-process-form" autocomplete="off">
+                    <input hidden type="text" id="select-process-input" value required>
+                </form>
+                <button type="button" class="btn btn-secondary btn-xlg" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary btn-xlg" form="select-process-form">Start <span class="process-name">[pass process name here]</span></button>
+            </div>
+          </div>
+        </div>
+      </div>  
+      <!-- start process modal end -->
+
+      <!-- prompt modal -->
+      <div class="modal" id="prompt-modal" tabindex="-1" role="dialog" aria-labelledby="prompt-title" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="prompt-title">Sample prompt</h5>
+            </div>
+            <div class="modal-body"></div>
+            <div hidden class="modal-footer">
+              <form hidden id="waiting-prompt-form">
+                  <input hidden type="text" id="process-name" value="process_name">
+              </form>
+              <button type="submit" class="btn btn-primary button-proceed btn-xlg" form="waiting-prompt-form">Acknowledge</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- prompt modal end -->
+
+      <!-- deviation modal -->
+      <div class="modal" id="deviation-modal" tabindex="-1" role="dialog" aria-labelledby="deviation-title" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="deviation-title" id="prompt-title">Sample prompt</h5>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+              <form hidden id="deviation-form">
+                  <input hidden type="text" id="process-name" value="process_name">
+              </form>
+              <button type="submit" class="btn btn-primary btn-xlg" form="deviation-form">Acknowledge</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- deviation modal end -->
+
+      <!-- data input modal -->
+      <div class="modal" id="data-input-modal" tabindex="-1" role="dialog" aria-labelledby="data-input-modal-title" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="data-input-modal-title">Data Input Prompt</h5>
+            </div>
+            <div class="modal-body">
+              <!-- data input form -->
+              <div class="modal-body-text"></div>
+              <div class="modal-body-error"></div>
+              <form id="data-input-form" autocomplete="off"></form>
+              <!-- data input form end -->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary cancel-operation btn-xlg">Cancel</button>
+              <button type="submit" class="btn btn-primary button-proceed btn-xlg" form="data-input-form">Start process</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- data input modal end -->
+
+      <!-- confirmation modal -->
+      <div class="modal" id="confirmation-modal" tabindex="-1" role="dialog" aria-labelledby="confirmation-modal-title" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="confirmation-modal-title">Data Input Prompt</h5>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+              <form hidden id="confirmation-form">
+                <input hidden type="text" id="confirmation-process-name" value="process_name">
+              </form>
+              <button type="button" class="btn btn-secondary btn-xlg" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary btn-xlg" form="confirmation-form">Confirm</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- confirmation modal end -->
+      
+      <!-- report preview modal -->
+      <div class="modal" id="report-preview-modal" tabindex="-1" role="dialog" aria-labelledby="report-preview-modal-title" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="report-preview-modal-title">Report File Name</h5>
+              <button class="btn btn-primary" id="report-edit-button" style="margin: 0 0 0 10px;">Edit</button>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="pdf-preview-container"></div>
+            </div>
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary" form="confirmation-form">Confirm</button>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <!-- report preview modal end -->
+
+      <!-- report edit modal -->
+      <div class="modal" id="report-edit-modal" tabindex="-1" role="dialog" aria-labelledby="report-edit-modal-title" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="report-edit-modal-title">Edit Report</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body" style="padding: 10px 20px 5px 20px; overflow-y: scroll;">
+              <form id="report-edit-form" autocomplete="off" style="height: 100%;">
+                <input hidden type="text" id="report-edit-input" value required>
+            </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary" form="report-edit-form">Confirm</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- report edit modal end -->

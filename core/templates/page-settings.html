@@ -1,0 +1,60 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Settings {% endblock title %}
+
+{% block content %}
+
+    <!-- Header -->
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+      <div class="container-fluid">
+        <div class="header-body">
+        </div>
+      </div>
+    </div>
+    
+    <div class="container-fluid mt--7">
+
+      <div class="row">
+        <div class="col-xl order-xl-1">
+          <div class="card shadow">
+            <div class="card-header bg-white border-0">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Settings</h3>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <form id="edit-default-values-form">
+                <div class="pl-lg-4 input-container"></div>
+                <!-- reader settings section end -->
+                <!-- <hr class="my-4" /> -->
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-success" form="edit-default-values-form">Update default values</button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- select read time end -->
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+
+      
+      {% comment %} {% include "includes/footer.html" %} {% endcomment %}
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+<script src="/static/assets/js/page-settings.js"></script>
+{% endblock javascripts %}
