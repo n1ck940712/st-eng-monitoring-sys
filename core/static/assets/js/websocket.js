@@ -51,6 +51,19 @@ function connect_websocket(){
         else if ((data.message_type == 'export response')){
             handle_export_response(data.message)
         }
+        else if ((data.message_type == 'report delete response')){
+            handle_delete_response(data.message)
+        }
+    }
+}
+
+function handle_delete_response(message){
+    $('.loading-overlay').hide()
+    $('.loading-overlay').removeClass('show')
+    show_alert(message.success, message.message)
+    if (message.success){
+        $('#report-delete-modal').modal('hide')
+        table.ajax.reload()
     }
 }
 

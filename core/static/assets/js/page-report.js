@@ -15,21 +15,20 @@ $("head").append($("<script></script>").attr("src", "/static/assets/js/plugins/P
 
 
 
-// ======================================================================================================
-// event listeners
-// ======================================================================================================
-
 $(document).ready(()=>{
     set_monday_start_of_week()
     date_range_init_report()
     report_table_init()
 })
 
-// const baseUrl = `${window.location.protocol}//${window.location.host}/assets/`;
 const baseUrl = `${window.location.protocol}//${window.location.host}/static/assets/package/dist/`;
 
 
+// ======================================================================================================
+// event listeners
+// ======================================================================================================
 
+// export report
 $('#report-table-export').click(()=>{
     var data = table.rows({selected: true}).data()
     var report_list=[]
@@ -57,6 +56,8 @@ $('#report-table-export').click(()=>{
     }
 })
 
+
+// preview report
 $('#report-table-preview').click(()=>{
     var data = table.rows({selected: true}).data()
     var report_list=[]
@@ -81,6 +82,48 @@ $('#report-table-preview').click(()=>{
     }
 })
 
+
+// delete report
+$('#report-table-delete').click(()=>{
+    var data = table.rows({selected: true}).data()
+    var report_list=[]
+    for (var i=0; i < data.length ;i++){
+        report_list.push(data[i]['file_name'])
+    }
+    if (report_list[0]){
+        $('#report-delete-form #report-delete-file-name').val(report_list[0])
+        $('#report-delete-file-name-confirm').html(report_list[0])
+
+        $('#report-delete-modal').modal('show')
+    }
+    else {
+        message = {
+            title: '',
+            text: 'Select a report to delete.',
+            button_text: 'report delete',
+            process_name: 'report delete',
+            wait_for_acknowledge: false,
+        }
+        load_prompt(message)
+    }
+})
+
+$('#report-delete-form').submit((e)=>{
+    e.preventDefault()
+    $('.loading-overlay').show()
+    $('.loading-overlay').addClass('show')
+    var data = {
+        'message':{
+            'file_name': $('#report-delete-file-name').val(),
+        },
+        'message_type': 'delete report',
+    }
+    console.log(data)
+    websocket_send(data)
+})
+
+
+// edit report
 $('#report-edit-button').click(()=>{
     report_type = $('#report-preview-modal .modal-title').text().split('_')
     report_type.splice(-1,1)
@@ -88,26 +131,6 @@ $('#report-edit-button').click(()=>{
     load_report_edit_fields(report_type, $('#report-preview-modal .modal-title').text())
     $('#report-edit-modal').modal('show')
     
-})
-
-$('.report-table-select-col').click(()=>{
-    console.log('select')
-    checkbox = $('#report-table-select-all-checkbox')
-    console.log(checkbox.prop('checked'))
-    checkbox.prop("checked", !checkbox.prop("checked"))
-    if (checkbox.prop('checked') == true) {
-        table.rows().select()
-    }
-    else {
-        table.rows().deselect()
-    }
-})
-
-
-$('.date-range-picker').on('apply.daterangepicker', function(ev, picker){
-    $('.date-range-picker-start-date').val(picker.startDate.format('YYYY/MM/DD'))
-    $('.date-range-picker-end-date').val(picker.endDate.format('YYYY/MM/DD'))
-    table.ajax.reload()
 })
 
 $('#report-edit-form').submit((e)=>{
@@ -128,6 +151,27 @@ $('#report-edit-form').submit((e)=>{
     }
     websocket_send(data)
 })
+
+
+// date range selector
+$('.date-range-picker').on('apply.daterangepicker', function(ev, picker){
+    $('.date-range-picker-start-date').val(picker.startDate.format('YYYY/MM/DD'))
+    $('.date-range-picker-end-date').val(picker.endDate.format('YYYY/MM/DD'))
+    table.ajax.reload()
+})
+
+
+// // select all check box
+// $('.report-table-select-col').click(()=>{
+//     checkbox = $('#report-table-select-all-checkbox')
+//     checkbox.prop("checked", !checkbox.prop("checked"))
+//     if (checkbox.prop('checked') == true) {
+//         table.rows().select()
+//     }
+//     else {
+//         table.rows().deselect()
+//     }
+// })
 
 // ======================================================================================================
 // functions
