@@ -1,0 +1,36 @@
+2022-02-11 13:41:55 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-11 13:41:55 | Modules Initiation DONE...
+2022-02-11 13:41:55 | ===============================
+
+2022-02-11 13:41:55 | instruments RUNNING...
+2022-02-11 13:41:55 | update_reading started
+2022-02-11 13:45:35 | flow rate setpoint: 0.000 L/min
+2022-02-11 14:29:45 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-11 14:29:45 | Modules Initiation DONE...
+2022-02-11 14:29:45 | ===============================
+
+2022-02-11 14:29:45 | instruments RUNNING...
+2022-02-11 14:29:45 | update_reading started
+2022-02-11 14:31:45 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-11 14:31:45 | Modules Initiation DONE...
+2022-02-11 14:31:45 | ===============================
+
+2022-02-11 14:31:45 | instruments RUNNING...
+2022-02-11 14:31:45 | update_reading started
+2022-02-11 15:08:14 | flow rate setpoint: 150.000 L/min
+2022-02-11 15:08:23 | flow rate setpoint: 0.000 L/min
+2022-02-11 15:09:30 | flow rate setpoint: 50.000 L/min
+2022-02-11 15:11:02 | flow rate setpoint: 150.000 L/min
+2022-02-11 15:11:15 | flow rate setpoint: 0.000 L/min
+2022-02-11 15:29:24 | flow rate setpoint: 0.000 L/min
+2022-02-11 17:23:55 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-11 17:23:55 | Modules Initiation DONE...
+2022-02-11 17:23:55 | ===============================
+
+2022-02-11 17:23:55 | instruments RUNNING...
+2022-02-11 17:23:55 | update_reading started
+2022-02-11 17:26:42 | flow rate setpoint: 150.000 L/min
+2022-02-11 17:26:55 | flow rate setpoint: 0.000 L/min
+2022-02-11 17:27:57 | flow rate setpoint: 50.000 L/min
+2022-02-11 17:28:43 | flow rate setpoint: 150.000 L/min
+2022-02-11 17:28:52 | flow rate setpoint: 0.000 L/min

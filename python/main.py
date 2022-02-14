@@ -9,7 +9,7 @@
 
 
 from modules import database, logger, encrypt, buzzer
-import time, threading, os, json, websocket, report
+import os, subprocess, time, threading, json, websocket, report
 from datetime import datetime, timedelta
 
 
@@ -53,6 +53,50 @@ process_run = False
 # =================================================================
 # program functions
 # =================================================================
+
+def report_export_response(result):
+    if (result == 0):
+        success = True
+        message = 'Report exported successfully'
+    elif (result == 1):
+        success = False
+        message = 'Report failed to export'
+    elif (result == 2):
+        success = False
+        message = 'No USB storage device found. Report failed to export.'
+    else:
+        success = False
+        message = 'Report failed to export'
+    data = {
+        'message': {
+            'success': success,
+            'message': message,
+            },
+        'message_type': 'export response',
+    }
+    websocket_send(data)
+    return
+
+def delete_report(message):
+    print(message['file_name'])
+    try:
+        database.query('local', 'update', 'DELETE FROM app_report WHERE file_name="%s"' % message['file_name'])
+        subprocess.run(['sudo', 'rm', "/home/pi/monitoring_sys/core/static/assets/reports/%s.pdf" % message['file_name']])
+        success = True
+        message = 'Report deleted successfully.'
+    except:
+        success = False
+        message = 'Failed to delete report.'
+    data = {
+        'message': {
+            'success': success,
+            'message': message,
+            },
+        'message_type': 'report delete response',
+    }
+    websocket_send(data)
+    return
+
 
 def update_report(message):
     variable_list = []
@@ -1267,8 +1311,7 @@ class post_production_3(threading.Thread):
         log.debug('<POST PRODUCTION> <DAY 3> END')
         return
         
-
-
+ 
 # =================================================================
 # threads
 # =================================================================
@@ -1429,30 +1472,11 @@ class connection_thread(threading.Thread):
             elif message_type == 'edit report':
                 update_report(message)
             
+            elif message_type == 'delete report':
+                delete_report(message)
+            
         return
 
-def report_export_response(result):
-    if (result == 0):
-        success = True
-        message = 'Report exported successfully'
-    elif (result == 1):
-        success = False
-        message = 'Report failed to export'
-    elif (result == 2):
-        success = False
-        message = 'No USB storage device found. Report failed to export.'
-    else:
-        success = False
-        message = 'Report failed to export'
-    data = {
-        'message': {
-            'success': success,
-            'message': message,
-            },
-        'message_type': 'export response',
-    }
-    websocket_send(data)
-    return
 
 # =================================================================
 # MAIN PROGRAM
