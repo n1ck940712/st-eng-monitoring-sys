@@ -450,7 +450,7 @@ def get_progress(request):
     elif request.method == 'GET':
         if request.GET.get('mode') == 'get progress':
             description = list(Progress.objects.all().extra(select={'timestamp':"DATE_FORMAT(timestamp, '%%I:%%i:%%S %%p')"}).values('description', 'timestamp').order_by('timestamp'))
-            percentage = list(Progress.objects.all().order_by('-timestamp').values('percentage'))
+            percentage = list(Progress.objects.filter(percentage__isnull=False).order_by('-timestamp').values('percentage'))
             if len(percentage) > 0:
                 percentage = float(percentage[0]['percentage'])
             else:
