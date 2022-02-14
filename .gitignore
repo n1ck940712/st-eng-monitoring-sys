@@ -10,6 +10,7 @@ __pycache__/
 *.db
 *.sqlite3
 *.log
+**/logs
 
 # venv
 env
@@ -24,3 +25,6 @@ package-lock.json
 staticfiles/*
 !staticfiles/.gitkeep 
 .vscode/symbols.json
+
+# reports
+*.pdf
