@@ -32,6 +32,7 @@ def fill_in_fields(f, variable_list):
     return
 
 def generate(log, batch_id, variable_list=None):
+    print('>>>>>>>>>>>> generate report')
     report = database.query('local', 'get', 'SELECT type, time_completed FROM app_report WHERE id="%s"' % batch_id)
     if len(report) > 0: 
         process_name = report[0][0]
@@ -39,13 +40,22 @@ def generate(log, batch_id, variable_list=None):
         process_date_input = process_date.strftime("%-d %b %Y")
         
         if process_name == 'pre production': 
-            row = database.query('local', 'get', 'SELECT flow, timestamp FROM app_logdata WHERE batch="%s" ORDER BY timestamp DESC' % batch_id)
-            if len(row) == 2:
+            row = database.query('local', 'get', 'SELECT flow, timestamp FROM app_logdata WHERE batch="%s" ORDER BY timestamp ASC' % batch_id)
+            row_length = len(row)
+            if (row_length > 0) and (row_length <= 2):
                 valid_data = True
-                start_purge_time = row[1][1].strftime("%H:%M:%S")
-                start_n2_flow_rate = row[1][0]
-                end_purge_time = row[0][1].strftime("%H:%M:%S")
-                end_n2_flow_rate = row[0][0]
+                try:
+                    start_purge_time = row[0][1].strftime("%H:%M:%S")
+                    start_n2_flow_rate = row[0][0]
+                except:
+                    start_purge_time = ''
+                    start_n2_flow_rate = ''
+                try:
+                    end_purge_time = row[1][1].strftime("%H:%M:%S")
+                    end_n2_flow_rate = row[1][0]
+                except:
+                    end_purge_time = ''
+                    end_n2_flow_rate = ''
                 
                 f = Template(format="A4", elements=get_pre_production_format(), title="Report")
                 f.add_page()
@@ -67,6 +77,7 @@ def generate(log, batch_id, variable_list=None):
 
         elif process_name == 'production': 
             rows = database.query('local', 'get', 'SELECT type, flow, flow_unit, temperature, temperature_unit, heater_set, heater_set_unit, pressure, pressure_unit, timestamp FROM app_logdata WHERE batch="%s" ORDER BY timestamp ASC' % batch_id)
+            print(batch_id, rows)
             if len(rows) > 0:
                 valid_data = True
                 elements=get_production_format()
@@ -121,33 +132,107 @@ def generate(log, batch_id, variable_list=None):
                 valid_data = False
                 log.error('invalid log data')
 
-        elif process_name == 'post production': 
-            day_1_start_datetime = database.query('local', 'get', 'SELECT timestamp FROM app_logdata WHERE batch="%s" AND type="post production day 1" ORDER BY timestamp ASC LIMIT 1' % batch_id)[0][0]
-            day_1_end_datetime = database.query('local', 'get', 'SELECT timestamp FROM app_logdata WHERE batch="%s" AND type="post production day 1" ORDER BY timestamp DESC LIMIT 1' % batch_id)[0][0]
-            day_2_start_datetime = database.query('local', 'get', 'SELECT timestamp FROM app_logdata WHERE batch="%s" AND type="post production day 2" ORDER BY timestamp ASC LIMIT 1' % batch_id)[0][0]
-            day_2_end_datetime = database.query('local', 'get', 'SELECT timestamp FROM app_logdata WHERE batch="%s" AND type="post production day 2" ORDER BY timestamp DESC LIMIT 1' % batch_id)[0][0]
-            day_3_start_datetime = database.query('local', 'get', 'SELECT timestamp FROM app_logdata WHERE batch="%s" AND type="post production day 3" ORDER BY timestamp ASC LIMIT 1' % batch_id)[0][0]
-            day_3_end_datetime = database.query('local', 'get', 'SELECT timestamp FROM app_logdata WHERE batch="%s" AND type="post production day 3" ORDER BY timestamp DESC LIMIT 1' % batch_id)[0][0]
+        elif process_name == 'post production':
+            
+
+
+            # try:
+            #     day_1_start_datetime = database.query('local', 'get', 'SELECT timestamp FROM app_logdata WHERE batch="%s" AND type="post production day 1" ORDER BY timestamp ASC LIMIT 1' % batch_id)[0][0]
+            # except:
+            #     day_1_start_datetime = ''
+
+            # try:
+            #     day_1_end_datetime = database.query('local', 'get', 'SELECT timestamp FROM app_logdata WHERE batch="%s" AND type="post production day 1" ORDER BY timestamp DESC LIMIT 1' % batch_id)[0][0]
+            # except:
+            #     day_1_end_datetime = ''
+
+            # try:
+            #     day_2_start_datetime = database.query('local', 'get', 'SELECT timestamp FROM app_logdata WHERE batch="%s" AND type="post production day 2" ORDER BY timestamp ASC LIMIT 1' % batch_id)[0][0]
+            # except:
+            #     day_2_start_datetime = ''
+
+            # try:
+            #     day_2_end_datetime = database.query('local', 'get', 'SELECT timestamp FROM app_logdata WHERE batch="%s" AND type="post production day 2" ORDER BY timestamp DESC LIMIT 1' % batch_id)[0][0]
+            # except:
+            #     day_2_end_datetime = ''
+
+            # try:
+            #     day_3_start_datetime = database.query('local', 'get', 'SELECT timestamp FROM app_logdata WHERE batch="%s" AND type="post production day 3" ORDER BY timestamp ASC LIMIT 1' % batch_id)[0][0]
+            # except:
+            #     day_2_start_datetime = ''
+
+            # try:
+            #     day_3_end_datetime = database.query('local', 'get', 'SELECT timestamp FROM app_logdata WHERE batch="%s" AND type="post production day 3" ORDER BY timestamp DESC LIMIT 1' % batch_id)[0][0]
+            # except:
+            #     day_3_end_datetime = ''
+
             rows = database.query('local', 'get', 'SELECT type, temperature, temperature_unit, heater_set, heater_set_unit, timestamp FROM app_logdata WHERE batch="%s" ORDER BY timestamp ASC' % batch_id)
             if len(rows) > 0:
                 valid_data = True
+                
+                day_1_logs = database.query('local', 'get', 'SELECT timestamp FROM app_logdata WHERE batch=%s AND type="post production day 1" ORDER BY timestamp ASC' % batch_id)
+                day_1_logs_length = len(day_1_logs)
+                if day_1_logs_length >= 1:
+                    day_1_start_datetime = day_1_logs[0][0]
+                    day_1_start_date = day_1_start_datetime.strftime('%-d %b %Y')
+                    day_1_start_time = day_1_start_datetime.strftime("%H:%M:%S")
+                    if day_1_logs_length >= 2:
+                        day_1_end_time = day_1_logs[-1][0].strftime("%H:%M:%S")
+                    else:
+                        day_1_end_time = ''
+                else:
+                    day_1_start_date = ''
+                    day_1_start_time = ''
+                    day_1_end_time = ''
+
+                day_2_logs = database.query('local', 'get', 'SELECT timestamp FROM app_logdata WHERE batch=%s AND type="post production day 2" ORDER BY timestamp ASC' % batch_id)
+                day_2_logs_length = len(day_2_logs)
+                if day_2_logs_length >= 1:
+                    day_2_start_datetime = day_2_logs[0][0]
+                    day_2_start_date = day_2_start_datetime.strftime('%-d %b %Y')
+                    day_2_start_time = day_2_start_datetime.strftime("%H:%M:%S")
+                    if day_2_logs_length >= 2:
+                        day_2_end_time = day_2_logs[-1][0].strftime("%H:%M:%S")
+                    else:
+                        day_2_end_time = ''
+                else:
+                    day_2_start_date = ''
+                    day_2_start_time = ''
+                    day_2_end_time = ''
+
+                day_3_logs = database.query('local', 'get', 'SELECT timestamp FROM app_logdata WHERE batch=%s AND type="post production day 3" ORDER BY timestamp ASC' % batch_id)
+                day_3_logs_length = len(day_3_logs)
+                if day_3_logs_length >= 1:
+                    day_3_start_datetime = day_3_logs[0][0]
+                    day_3_start_date = day_3_start_datetime.strftime('%-d %b %Y')
+                    day_3_start_time = day_3_start_datetime.strftime("%H:%M:%S")
+                    if day_3_logs_length >= 2:
+                        day_3_end_time = day_3_logs[-1][0].strftime("%H:%M:%S")
+                    else:
+                        day_3_end_time = ''
+                else:
+                    day_3_start_date = ''
+                    day_3_start_time = ''
+                    day_3_end_time = ''
+                
+                
                 elements=get_post_production_format()
                 f = Template(format="A4", elements=elements, title="Report")
                 f.add_page()
                 page_number = 1
                 f['process-start-date'] = str(process_date_input)
                 f['page-number'] = page_number
-                f['section-1-date-input'] = day_1_start_datetime.strftime('%-d %b %Y')
-                f['section-1-start-time-input'] = day_1_start_datetime.strftime("%H:%M:%S")
-                f['section-1-end-time-input'] = day_1_end_datetime.strftime("%H:%M:%S")
+                f['section-1-date-input'] = day_1_start_date
+                f['section-1-start-time-input'] = day_1_start_time
+                f['section-1-end-time-input'] = day_1_end_time
                 
-                f['section-2-date-input'] = day_2_start_datetime.strftime('%-d %b %Y')
-                f['section-2-start-time-input'] = day_2_start_datetime.strftime("%H:%M:%S")
-                f['section-2-end-time-input'] = day_2_end_datetime.strftime("%H:%M:%S")
+                f['section-2-date-input'] = day_2_start_date
+                f['section-2-start-time-input'] = day_2_start_time
+                f['section-2-end-time-input'] = day_2_end_time
 
-                f['section-3-date-input'] = day_3_start_datetime.strftime('%-d %b %Y')
-                f['section-3-start-time-input'] = day_3_start_datetime.strftime("%H:%M:%S")
-                f['section-3-end-time-input'] = day_3_end_datetime.strftime("%H:%M:%S")
+                f['section-3-date-input'] = day_3_start_date
+                f['section-3-start-time-input'] = day_3_start_time
+                f['section-3-end-time-input'] = day_3_end_time
 
                 if variable_list != None:
                     fill_in_fields(f, variable_list)

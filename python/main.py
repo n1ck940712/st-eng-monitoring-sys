@@ -78,7 +78,6 @@ def report_export_response(result):
     return
 
 def delete_report(message):
-    print(message['file_name'])
     try:
         database.query('local', 'update', 'DELETE FROM app_report WHERE file_name="%s"' % message['file_name'])
         subprocess.run(['sudo', 'rm', "/home/pi/monitoring_sys/core/static/assets/reports/%s.pdf" % message['file_name']])
@@ -121,11 +120,6 @@ def update_report(message):
     websocket_send(data)
     return
 
-def clear_sessions():
-    log.debug('clearing all sessions')
-    database.query('local', 'update', 'DELETE FROM django_session WHERE 1;')
-    return
-
 def trigger_alarm(state='on'):
     if state == 'on':
         buzzer.turn_on()
@@ -146,14 +140,13 @@ def generate_report(process_name):
 
 
 def check_deviation(process):
-    dont_prompt_deviation_until
     log.debug('check_deviation started for process: %s' % (process))
     pressure_deviated = False
     temperature_deviated = False
     n2_flow_rate_deviated = False
-    
     param_dict = {}
     next_check_time = datetime(2000, 1, 1)
+
     while process_run:
         if datetime.now() > next_check_time:
             if process == 'production part 1':
@@ -209,14 +202,12 @@ def check_deviation(process):
                 else:
                     temperature_deviated = False
 
-
             if temperature_deviated or pressure_deviated or n2_flow_rate_deviated:
                 if datetime.now() > dont_prompt_deviation_until:
                     show_deviation_prompt('Parameters deviated', '<span style="font-size:2rem">%s</span>' % alert_message)
                     trigger_alarm()
             else:
                 close_prompt(['deviation prompt',])
-            # time.sleep(1)
             next_check_time = datetime.now() + timedelta(seconds=5)
     log.debug('check_deviation ended for %s' % process)
     close_prompt(['deviation prompt',])
@@ -224,7 +215,6 @@ def check_deviation(process):
 
 
 def disable_prompt_deviation_until():
-    print('deivation close')
     global dont_prompt_deviation_until
     dont_prompt_deviation_until = datetime.now() + timedelta(minutes=1)
     close_prompt(['deviation prompt',])
@@ -618,6 +608,7 @@ def progress_bar_update(start_percentage, end_percentage, process_duration):
             time_elapsed_seconds = (datetime.now() - start_time).total_seconds()
             progress_made = time_elapsed_seconds / (process_duration*60)
             percentage = (end_percentage - start_percentage) * progress_made
+            database.query('local', 'update', 'UPDATE app_progress SET percentage=%s' % (start_percentage + percentage))
             websocket_send(data = {
                 'message':{
                     'process': '',
@@ -722,10 +713,18 @@ def reaffirm_cancel_operation():
     
 def reset_operation():
     global process_run
+    report_generated = False
     log.debug('<RESET ALL OPERATION>')
-    latest_log_batch_id = database.query('local', 'get', 'SELECT batch FROM app_logdata ORDER BY batch DESC LIMIT 1')
-    if len(latest_log_batch_id) > 0:
-        latest_log_batch_id = latest_log_batch_id[0][0]
+    latest_log = database.query('local', 'get', 'SELECT batch, type FROM app_logdata ORDER BY batch DESC LIMIT 1')
+    if len(latest_log) > 0:
+        latest_log_batch_id = latest_log[0][0]
+        latest_log_type = latest_log[0][1]
+        if latest_log_type == 'pre production':
+            process_name = 'pre production'
+        elif latest_log_type in ['production part 1', 'production part 2', 'production part 3']:
+            process_name = 'production'
+        elif latest_log_type in ['post production day 1', 'post production day 2', 'post production day 3']:
+            process_name = 'post production'
     else:
         latest_log_batch_id = 0
     latest_report_batch_id = database.query('local', 'get', 'SELECT id FROM app_report ORDER BY id DESC LIMIT 1')
@@ -734,8 +733,8 @@ def reset_operation():
     else:
         latest_report_batch_id = 0
     if latest_log_batch_id != latest_report_batch_id:
-        log.debug('<RESET ALL OPERATION> removed all logged data')
-        database.query('local', 'update', 'DELETE FROM app_logdata WHERE batch=%s' % latest_log_batch_id)
+        generate_report(process_name)
+        report_generated = True
     flow_control(0)
     close_prompt('all')
     trigger_alarm('off')
@@ -744,7 +743,10 @@ def reset_operation():
     update_progress('', '', 0, True)
     time.sleep(0.5)
     trigger_event()
-    show_prompt('', 'All process reset.')
+    if report_generated:
+        show_prompt('', 'All process reset. Report is generated.')
+    else:
+        show_prompt('', 'All process reset')
     return
 
 def show_prompt_data_input(title, text, parameter, process_name='', button_text='Proceed'):
@@ -1103,7 +1105,7 @@ class production(threading.Thread):
         trigger_alarm()
         close_prompt('all')
         time.sleep(1)
-        show_prompt('Production', 'Production completed', True, 'end production')
+        show_prompt('Production', 'Production completed. Report generated.', True, 'end production')
         trigger_event()
         generate_report('production')
         update_progress('', '', 0, True)
@@ -1218,7 +1220,7 @@ class post_production_2(threading.Thread):
         update_progress('post production day 2', 'Logging started (log every %s min for %s min).' % (logging_interval, process_duration), 5.0)
         _logging = threading.Thread(target=logging_thread, args=('post production', logging_interval))
         _logging.start()
-        threading.Thread(target=progress_bar_update, args=(10, 95, (datetime.now() - post_production_day_2_start_time).total_seconds()/60)).start()
+        threading.Thread(target=progress_bar_update, args=(10, 95, process_duration)).start()
         while ((datetime.now() - post_production_day_2_start_time).total_seconds() < process_duration * 60) and process_run:
             time.sleep(0.1)
         if process_run:
@@ -1299,7 +1301,7 @@ class post_production_3(threading.Thread):
             update_progress('', '', 0, True)
             close_prompt('all')
             time.sleep(1)
-            show_prompt('Post Production Day 3', 'Day 3 cleaning completed.', True, 'end post production')
+            show_prompt('Post Production Day 3', 'Day 3 cleaning completed. Report generated.', True, 'end post production')
             log.debug('<POST PRODUCTION> <DAY 3> Trigger alarm')
             trigger_alarm()
             log.debug('<POST PRODUCTION> <DAY 3> END')
@@ -1348,14 +1350,13 @@ class connection_thread(threading.Thread):
         log.info("connection_thread started")
         while 1:
             try:
-#                     ws_url = "ws://localhost:8009/ws/socket/" # development
-                    ws_url = "ws://0.0.0.0:8001/ws/socket/" # production
-                    ws = self.websocket.WebSocketApp(ws_url,
-                                    on_open = self.on_open,
-                                    on_message = self.on_message,
-                                    on_error = self.on_error,
-                                    on_close = self.on_close)
-                    ws.run_forever()
+                ws_url = "ws://0.0.0.0:8001/ws/socket/" # production
+                ws = self.websocket.WebSocketApp(ws_url,
+                                on_open = self.on_open,
+                                on_message = self.on_message,
+                                on_error = self.on_error,
+                                on_close = self.on_close)
+                ws.run_forever()
             except Exception as e:
                 log.error('connection_thread ERROR. %s' % e)
             time.sleep(10)
@@ -1402,7 +1403,6 @@ class connection_thread(threading.Thread):
             elif message_type == 'prompt data input submit':
                 close_prompt(['data input prompt'], )
                 update_database(message)
-                # time.sleep(1)
                 if message['start_process_name'] == 'pre production':
                     pre_production_receive_input = True
                 elif message['start_process_name'] == 'production part 1':
@@ -1494,7 +1494,6 @@ if __name__ == "__main__":
     log.info("%s RUNNING..." % os.path.splitext(os.path.basename(__file__))[0])
     
     # main program
-    # clear_sessions()
     connection_thread(websocket).start()
     sensor_reading_update().start()
     
