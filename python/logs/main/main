@@ -1,97 +1,19 @@
-2022-02-14 08:22:05 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
-2022-02-14 08:22:06 | encrypt.init SUCCESS
-2022-02-14 08:22:07 | Modules Initiation DONE...
-2022-02-14 08:22:07 | ===============================
+2022-02-14 11:09:19 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
+2022-02-14 11:09:19 | encrypt.init SUCCESS
+2022-02-14 11:09:19 | Modules Initiation DONE...
+2022-02-14 11:09:19 | ===============================
 
-2022-02-14 08:22:07 | main RUNNING...
-2022-02-14 08:22:07 | connection_thread started
-2022-02-14 08:22:07 | sensor_reading_update STARTED
-2022-02-14 08:22:07 | on_error. [Errno 111] Connection refused
-2022-02-14 08:22:07 | on_close. None. None
-2022-02-14 08:22:07 | sensor_reading_update FAILED. Connection is already closed.
-2022-02-14 08:22:12 | sensor_reading_update FAILED. Connection is already closed.
-2022-02-14 08:22:17 | on_error. [Errno 111] Connection refused
-2022-02-14 08:22:17 | on_close. None. None
-2022-02-14 08:22:18 | sensor_reading_update FAILED. Connection is already closed.
-2022-02-14 08:22:23 | sensor_reading_update FAILED. Connection is already closed.
-2022-02-14 08:22:45 | <FROM UI>: ---> {"data": {"message": "", "message_type": "cancel operation", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.47622"}}
-2022-02-14 08:22:48 | <FROM UI>: ---> {"data": {"message": {"process_name": "cancel operation"}, "message_type": "confirm", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.47622"}}
-2022-02-14 08:22:48 | <RESET ALL OPERATION>
-2022-02-14 08:22:48 | <RESET ALL OPERATION> removed all logged data
-2022-02-14 08:22:48 | <INSTRUMENTS> set flow controller: 0
-2022-02-14 08:22:49 | <SYSTEM> trigger event
-2022-02-14 09:34:04 | <FROM UI>: ---> {"data": {"message": {"file_name": "production_11Feb2022"}, "message_type": "delete report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.33434"}}
-2022-02-14 09:43:03 | <FROM UI>: ---> {"data": {"message": {"file_name": "production_11Feb2022"}, "message_type": "delete report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.35154"}}
-2022-02-14 09:48:39 | <FROM UI>: ---> {"data": {"message": {"file_name": "production_11Feb2022"}, "message_type": "delete report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.35614"}}
-2022-02-14 09:54:31 | <FROM UI>: ---> {"data": {"message": {"file_name": "production_11Feb2022"}, "message_type": "delete report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.35030"}}
-2022-02-14 10:01:14 | <FROM UI>: ---> {"data": {"message": {"file_name": "pre_production_11Feb2022(1)"}, "message_type": "delete report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.38878"}}
-2022-02-14 10:01:40 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
-2022-02-14 10:01:40 | encrypt.init SUCCESS
-2022-02-14 10:01:41 | Modules Initiation DONE...
-2022-02-14 10:01:41 | ===============================
-
-2022-02-14 10:01:41 | main RUNNING...
-2022-02-14 10:01:41 | connection_thread started
-2022-02-14 10:01:41 | sensor_reading_update STARTED
-2022-02-14 10:01:45 | <FROM UI>: ---> {"data": {"message": {"file_name": "pre_production_11Feb2022(1)"}, "message_type": "delete report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.38878"}}
-2022-02-14 10:01:45 | mysql_query (local, update) FAILED.
-(1054, "Unknown column 'name' in 'where clause'")
-2022-02-14 10:03:56 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
-2022-02-14 10:03:56 | encrypt.init SUCCESS
-2022-02-14 10:03:57 | Modules Initiation DONE...
-2022-02-14 10:03:57 | ===============================
-
-2022-02-14 10:03:57 | main RUNNING...
-2022-02-14 10:03:57 | connection_thread started
-2022-02-14 10:03:57 | sensor_reading_update STARTED
-2022-02-14 10:07:46 | <FROM UI>: ---> {"data": {"message": {"file_name": "pre_production_11Feb2022(1)"}, "message_type": "delete report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.40178"}}
-2022-02-14 10:07:46 | mysql_query (local, update) FAILED.
-(1054, "Unknown column 'name' in 'where clause'")
-2022-02-14 10:08:49 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
-2022-02-14 10:08:50 | encrypt.init SUCCESS
-2022-02-14 10:08:50 | Modules Initiation DONE...
-2022-02-14 10:08:50 | ===============================
-
-2022-02-14 10:08:50 | main RUNNING...
-2022-02-14 10:08:50 | connection_thread started
-2022-02-14 10:08:50 | sensor_reading_update STARTED
-2022-02-14 10:09:34 | <FROM UI>: ---> {"data": {"message": {"file_name": "pre_production_11Feb2022(1)"}, "message_type": "delete report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.40548"}}
-2022-02-14 10:10:18 | <FROM UI>: ---> {"data": {"message": {"file_name": "pre_production_11Feb2022(1)"}, "message_type": "delete report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.40548"}}
-2022-02-14 10:11:24 | <FROM UI>: ---> {"data": {"message": {"file_name": "pre_production_11Feb2022(1)"}, "message_type": "delete report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.40932"}}
-2022-02-14 10:12:21 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
-2022-02-14 10:12:21 | encrypt.init SUCCESS
-2022-02-14 10:12:21 | Modules Initiation DONE...
-2022-02-14 10:12:21 | ===============================
-
-2022-02-14 10:12:21 | main RUNNING...
-2022-02-14 10:12:21 | connection_thread started
-2022-02-14 10:12:21 | sensor_reading_update STARTED
-2022-02-14 10:18:36 | <FROM UI>: ---> {"data": {"message": {"file_name": "pre_production_11Feb2022(1)"}, "message_type": "delete report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.40932"}}
-2022-02-14 10:19:04 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
-2022-02-14 10:19:04 | encrypt.init SUCCESS
-2022-02-14 10:19:04 | Modules Initiation DONE...
-2022-02-14 10:19:04 | ===============================
-
-2022-02-14 10:19:04 | main RUNNING...
-2022-02-14 10:19:04 | connection_thread started
-2022-02-14 10:19:04 | sensor_reading_update STARTED
-2022-02-14 10:19:12 | <FROM UI>: ---> {"data": {"message": {"file_name": "pre_production_11Feb2022(1)"}, "message_type": "delete report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.42490"}}
-2022-02-14 10:20:03 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
-2022-02-14 10:20:03 | encrypt.init SUCCESS
-2022-02-14 10:20:03 | Modules Initiation DONE...
-2022-02-14 10:20:03 | ===============================
-
-2022-02-14 10:20:03 | main RUNNING...
-2022-02-14 10:20:03 | connection_thread started
-2022-02-14 10:20:03 | sensor_reading_update STARTED
-2022-02-14 10:20:11 | <FROM UI>: ---> {"data": {"message": {"file_name": "pre_production_11Feb2022(1)"}, "message_type": "delete report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.42696"}}
-2022-02-14 10:22:03 | <FROM UI>: ---> {"data": {"message": {"file_name": "pre_production_11Feb2022"}, "message_type": "delete report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.43058"}}
-2022-02-14 10:43:35 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
-2022-02-14 10:43:35 | encrypt.init SUCCESS
-2022-02-14 10:43:35 | Modules Initiation DONE...
-2022-02-14 10:43:35 | ===============================
-
-2022-02-14 10:43:35 | main RUNNING...
-2022-02-14 10:43:35 | connection_thread started
-2022-02-14 10:43:35 | sensor_reading_update STARTED
-2022-02-14 10:43:46 | <FROM UI>: ---> {"data": {"message": {"file_name": "production_11Feb2022"}, "message_type": "delete report", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.47356"}}
+2022-02-14 11:09:19 | main RUNNING...
+2022-02-14 11:09:19 | connection_thread started
+2022-02-14 11:09:19 | sensor_reading_update STARTED
+2022-02-14 11:09:30 | <FROM UI>: ---> {"data": {"message": "pre production", "message_type": "process select", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.50820"}}
+2022-02-14 11:09:30 | <PRE PRODUCTION> START
+2022-02-14 11:09:31 | <SYSTEM> trigger event
+2022-02-14 11:09:36 | <FROM UI>: ---> {"data": {"message": "", "message_type": "cancel operation", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.50820"}}
+2022-02-14 11:09:36 | <PRE PRODUCTION> prompt for data input: (['n2 flow rate', 'purging duration'])
+2022-02-14 11:09:37 | <FROM UI>: ---> {"data": {"message": {"process_name": "cancel operation"}, "message_type": "confirm", "user_role": "Guest", "recipient_ip": "127.0.0.1", "sender_ip": "127.0.0.1.50820"}}
+2022-02-14 11:09:37 | <RESET ALL OPERATION>
+2022-02-14 11:09:37 | <RESET ALL OPERATION> removed all logged data
+2022-02-14 11:09:37 | <INSTRUMENTS> set flow controller: 0
+2022-02-14 11:09:38 | <SYSTEM> trigger event
+2022-02-14 11:09:38 | <PRE PRODUCTION> END

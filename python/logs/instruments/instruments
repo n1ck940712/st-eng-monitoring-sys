@@ -1,7 +1,0 @@
-2022-02-14 08:22:05 | database.init SUCCESS. db (local): 127.0.0.1. db (remote): 127.0.0.1. db (test): 127.0.0.1
-2022-02-14 08:22:05 | Modules Initiation DONE...
-2022-02-14 08:22:05 | ===============================
-
-2022-02-14 08:22:05 | instruments RUNNING...
-2022-02-14 08:22:05 | update_reading started
-2022-02-14 08:22:50 | flow rate setpoint: 0.000 L/min
