@@ -79,7 +79,7 @@ def report_export_response(result):
 
 def delete_report(message):
     try:
-        database.query('local', 'update', 'DELETE FROM app_report WHERE file_name="%s"' % message['file_name'])
+        database.query('local', 'update', 'UPDATE app_report SET deleted=1 WHERE file_name="%s"' % message['file_name'])
         subprocess.run(['sudo', 'rm', "/home/pi/monitoring_sys/core/static/assets/reports/%s.pdf" % message['file_name']])
         success = True
         message = 'Report deleted successfully.'
@@ -133,7 +133,7 @@ def trigger_alarm(state='on'):
     return
 
 def generate_report(process_name):
-    database.query('local', 'insert', 'INSERT INTO app_report (`type`, time_completed) VALUES ("%s", "%s")' % (process_name, datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
+    database.query('local', 'insert', 'INSERT INTO app_report (`type`, time_completed, deleted) VALUES ("%s", "%s", 0)' % (process_name, datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
     batch_id = database.query('local', 'get', 'SELECT id FROM app_report ORDER BY id DESC LIMIT 1')[0][0]
     report.generate(log, batch_id)
     return

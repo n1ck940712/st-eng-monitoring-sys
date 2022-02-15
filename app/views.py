@@ -486,7 +486,7 @@ def report(request):
         if request.GET.get('mode') == 'get reports':
             start_date = datetime.datetime.strptime(request.GET.get('start_date'), '%Y/%m/%d')
             end_date = datetime.datetime.strptime(request.GET.get('end_date'), '%Y/%m/%d').replace(hour=23, minute=59, second=59, microsecond=999999)
-            report_list2 = list(Report.objects.filter(time_completed__range = [start_date, end_date]).extra(select={'time_completed':"DATE_FORMAT(time_completed, '%%I:%%i %%p - %%d %%b %%Y')"}).values('file_name', 'time_completed'))
+            report_list2 = list(Report.objects.filter(time_completed__range = [start_date, end_date], deleted=False).extra(select={'time_completed':"DATE_FORMAT(time_completed, '%%I:%%i %%p - %%d %%b %%Y')"}).values('file_name', 'time_completed'))
             print(report_list2)
             x = []
             report_list = []
