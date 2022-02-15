@@ -6100,10 +6100,6 @@ button.close {
   outline: 0;
 }
 
-#confirmation-modal{
-  z-index: 1500;
-}
-
 .modal-dialog {
   position: relative;
   width: auto;
