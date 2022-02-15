@@ -31,24 +31,21 @@ class update_reading(threading.Thread):
 
     def run(self):
         global flow_controller, pressure, temperature
-        log.info("update_reading started")
         while 1:
-            flow = flow_ctrl.get_flow(flow_controller)
-#             print(flow) # NL/min
-            update_database('n2 flow rate', flow)
-            pres = btu_981.get_pressure(pressure)
-#             print(pres) # kpa
-            update_database('pressure', pres)
-            temp = btu_981.get_temperature(temperature)
-#             print(temp)  #celsius
-            update_database('temperature', temp)
-            
-            row = database.query('local', 'get', 'SELECT status, set_point FROM app_sensorreading WHERE name="n2 flow rate"')[0]
-            if row[0] == '1':
-                flow_ctrl.set_setpoint(flow_controller, float(row[1]))
-                log.info('flow rate setpoint: %s L/min' % row[1])
-                database.query('local', 'update', 'UPDATE app_sensorreading SET status="0" WHERE name="n2 flow rate"')
-            
+            try:
+                flow = flow_ctrl.get_flow(flow_controller) # NL/min
+                update_database('n2 flow rate', flow)
+                pres = btu_981.get_pressure(pressure) # kpa
+                update_database('pressure', pres)
+                temp = btu_981.get_temperature(temperature) # celsius
+                update_database('temperature', temp)
+                
+                row = database.query('local', 'get', 'SELECT status, set_point FROM app_sensorreading WHERE name="n2 flow rate"')[0]
+                if row[0] == '1':
+                    flow_ctrl.set_setpoint(flow_controller, float(row[1]))
+                    database.query('local', 'update', 'UPDATE app_sensorreading SET status="0" WHERE name="n2 flow rate"')
+            except:
+                log.error('update_reading error')    
             time.sleep(1)
 
 

@@ -118,7 +118,6 @@ $('#report-delete-form').submit((e)=>{
         },
         'message_type': 'delete report',
     }
-    console.log(data)
     websocket_send(data)
 })
 
@@ -258,14 +257,11 @@ function date_range_init_report(){
     })
     $('.date-range-picker-start-date').val($('.date-range-picker').data('daterangepicker').startDate.format('YYYY/MM/DD'))
     $('.date-range-picker-end-date').val($('.date-range-picker').data('daterangepicker').endDate.format('YYYY/MM/DD'))
-    console.log($('.date-range-picker-start-date').val())
-    console.log($('.date-range-picker-end-date').val())
 }
 
 
 function report_table_init(){
     
-    console.log('report table init')
     table = $('.table').DataTable({
         bInfo : false,
         bLengthChange: false,
@@ -274,12 +270,6 @@ function report_table_init(){
         autoWidth: false,
         scrollY: "500px",
         order: [[ 1, 'desc' ]],
-        // columnDefs: [ {
-        //     searchable: false,
-        //     orderable: false,
-        //     className: 'select-checkbox',
-        //     targets:   0
-        // } ],
         select: {
             style:    'single',
             selector: 'td'
@@ -295,7 +285,6 @@ function report_table_init(){
             }
         },
         columns: [
-            // { "defaultContent": "" },
             { 'data': "file_name" },
             { 'data': "time_completed" },
         ],
@@ -304,10 +293,5 @@ function report_table_init(){
         }
     });
     table.columns.adjust()
-    // setInterval(function() {
-        
-    //     console.log('reload table')
-    //     table.ajax.reload()
-    // }, 1000)
 }
 

@@ -1,11 +1,3 @@
-/*!
-
-=========================================================
-* FloSkid Dashboard - v1.0.0
-=========================================================
-
-*/
-
 //
 // date time clock
 // 
@@ -14,12 +6,8 @@ $(document).ready(()=>{
 
   setInterval(() => {
     ajax_request('date_time_clock/', 'get', 'get date time').done((data)=>{
-      console.log(data)
       $('span#time').html(data.time)
       $('span#date').html(data.date)
-      // if (sessions_username != data.username){
-      //   force_logout()
-      // }
     })
   }, 10000);
   
@@ -44,7 +32,6 @@ function init_datepicker() {
   // Methods
 
   function init($this) {
-    console.log('asdfaklsdfja;lsjkdf;alskdjf')
     var options = {
       disableTouchKeyboard: true,
       autoclose: false
@@ -1137,7 +1124,6 @@ var SalesChart = (function() {
 
 // handle all ajax requests
 function ajax_request(url, method, mode, data={}, alert_en=false, loading_en=false){
-  console.log('ajax_request:', url, '\nMethod:', method, '\nMode:', mode, '\nData:', data, '\nAlert enable:', alert_en)
   if (loading_en){
     $('.loading-overlay').addClass('show')
   }
@@ -1149,7 +1135,6 @@ function ajax_request(url, method, mode, data={}, alert_en=false, loading_en=fal
     headers: {'X-CSRFToken': $('[name=csrfmiddlewaretoken]').val()},
     data: data,
     success: function(data){
-      // console.log('ajax_response:', url, '\nsuccess:', data.success, '\nmessage:', data.message)
       if (alert_en){
         show_alert(data.success, data.message)
       }
@@ -1157,7 +1142,6 @@ function ajax_request(url, method, mode, data={}, alert_en=false, loading_en=fal
     },
     fail: function(){
       $('.loading-overlay').removeClass('show')
-      // console.log('ajax_handler FAILED:', url, method, mode, alert)
     },
   })
 }
@@ -1166,7 +1150,6 @@ function ajax_request(url, method, mode, data={}, alert_en=false, loading_en=fal
 // alerts
 function show_alert(status, message){
   setTimeout(function(){
-    // console.log('show_alert')
     if (status){
       $('.alert').html('<strong class="text-uppercase">success</strong> '+ message)
       $('.alert').addClass('alert-success')
@@ -1203,9 +1186,6 @@ else{
   $('sensor-reading-form').css({'margin-top':'10vpx'})
 }
 
-$('.link-disabled').click(()=>{
-  console.log('cant click disabled links')
-})
 
 // ===========================================================================================
 // custom jquery functions

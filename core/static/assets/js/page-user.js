@@ -2,14 +2,9 @@
 // dependencies
 // ======================================================================================================
 
-
-
 // ======================================================================================================
 // event listener
 // ======================================================================================================
-
-// inits ------------------------------------------------------------------------
-
 
 // get user profile and user info form
 $('#edit-self-user-form').ready(async function(){
@@ -19,21 +14,17 @@ $('#edit-self-user-form').ready(async function(){
     }
 })
 
-
 // $('.table-user-management').ready(function(){
 //     if ($('.table-user-management').length > 0){
 //         get_user_list()
 //     }
 // })
 
-
 $('.btn-add-user').click(function(){
     $('#add-user-modal-container').modal('show')
     $('#add-user-form').find('input').val('')
     $('#add-user-form').find('select').val('')
 })
-
-
 
 // post forms ------------------------------------------------------------------------
 
@@ -43,20 +34,17 @@ $('#edit-user-form').submit((e)=>{
     post_edit_user_form()
 })
 
-
 // update self profile changes
 $('#edit-self-user-form').submit((e)=>{
     e.preventDefault();
     post_edit_self_user()
 })
 
-
 // add new user
 $('#add-user-form').submit((e)=>{
     e.preventDefault()
     post_add_user_form()
 })
-
 
 // change password
 $('#change-password-form').submit((e)=>{
@@ -78,10 +66,8 @@ $(document).on('click', '.btn-edit-user', function(e){
 // ======================================================================================================
 
 async function get_self_user_profile(){
-    console.log('get_user profile')
     await ajax_request('user_profile/', 'GET', 'get one', {username: 'self'}, false, true).done((data)=>{
         if (data.success){
-            console.log(data)
             var $form = $('#edit-self-user-form')
             $form.find('#input-username').val(data.username)
             $form.find('#input-email').val(data.email)

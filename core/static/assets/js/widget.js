@@ -54,7 +54,6 @@ $("head").append($("<link></link>").attr({"href": "/static/assets/js/plugins/dat
 // grid.on('added', function(e, items) {
 //     let str = '';
 //     items.forEach(function(item) { str += ' (x,y)=' + item.x + ',' + item.y; });
-//     console.log(e.type + ' ' + items.length + ' items:' + str );
 // })
 
 
@@ -83,7 +82,6 @@ function init_gridstack(){
 
 // save widget layout
 function save_widget_layout(){
-    console.log('saving widget layout')
     var widgets = [];
     $('.grid-stack-item').each(function () {
         widgets.push({
@@ -96,13 +94,11 @@ function save_widget_layout(){
             widget_name: $(this).find('.widget-name').text(),
         });
     });
-    console.log('save_widget_layout:', widgets)
     ajax_request('widget/', 'POST', 'save layout', {widgets: JSON.stringify(widgets)}, true)
 }
 
 
 function disable_widget_edit(){
-    console.log('exit edit')
     grid.movable('.grid-stack-item', false)
     grid.resizable('.grid-stack-item', false)
 }
@@ -124,7 +120,6 @@ function get_widget_id_num(){
             missing_widget_id.push(String(i));
         }
     }
-    console.log(missing_widget_id)
     return missing_widget_id[0]
 }
 
@@ -158,7 +153,6 @@ async function load_widget(layout){
 
 // insert selected widget
 async function insert_new_widget(gs_x, gs_y, gs_w, gs_h, widget_type, widget_id, widget_name){
-    console.log(`insert new widget (widget_type:${widget_type}, widget_id:${widget_id}, widget_name:${widget_name})`)
     if (!widget_id) {
         var widget_id = get_widget_id_num()
     }
@@ -173,7 +167,6 @@ async function insert_all_widget_html(){
     var widgets_type = $('.grid-stack-item').attrs('widget-type')
     await ajax_request('widget/', 'GET', 'get widget html all', {widgets_type: JSON.stringify(widgets_type)}).done((data)=>{
         if (data.success) { 
-            // console.log(data.widgets_html)
             $.each(data.widgets_html, (index, value)=>{
                 $('[gs-id="'+value.widget_id+'"]').find('.grid-stack-item-content').append(value.widget_html)
                 if (value.device_id != null){
@@ -186,9 +179,7 @@ async function insert_all_widget_html(){
 
 // insert widget html to div
 async function insert_widget_html(widget_id, widget_type, widget_name){
-    console.log('insert widget html')
     await ajax_request('widget/', 'GET', 'get widget html', {widget_type: widget_type}, false).done((data)=>{
-        console.log('insert widget html done')
         if (data.success) { 
             var header = '<div class="widget-name"><h6>'+widget_name+'</h6></div>'
             $('[gs-id="'+widget_id+'"]').attr('widget-type', widget_type).find('.grid-stack-item-content').html(header+data.html)
@@ -228,10 +219,8 @@ function init_new_widget(){
     $.each(widget_id_arr, (index, value)=>{
         var $widget = $('[gs-id="'+value+'"]')
         var widget_type = widget_type_arr[index]
-        console.log($widget, widget_type)
         if (widget_type =='idle'){
             $('.select-process-button').click((e)=>{
-                console.log(e.target.attributes['data-process'].value)
                 var process_name = e.target.attributes['data-process'].value
                 process_name = process_name.toLowerCase().replace(/\b[a-z]/g, function(letter) {
                     return letter.toUpperCase();
@@ -253,7 +242,6 @@ function init_new_widget(){
         }
         else if (widget_type =='post_production_wait_day_2'){
             $('.select-process-button').click((e)=>{
-                console.log(e.target.attributes['data-process'].value)
                 var process_name = e.target.attributes['data-process'].value
                 process_name = process_name.toLowerCase().replace(/\b[a-z]/g, function(letter) {
                     return letter.toUpperCase();
@@ -272,7 +260,6 @@ function init_new_widget(){
         }
         else if (widget_type =='post_production_wait_day_3'){
             $('.select-process-button').click((e)=>{
-                console.log(e.target.attributes['data-process'].value)
                 var process_name = e.target.attributes['data-process'].value
                 process_name = process_name.toLowerCase().replace(/\b[a-z]/g, function(letter) {
                     return letter.toUpperCase();
@@ -304,7 +291,6 @@ function init_new_widget(){
         // }
         // else if (widget_type == 'button'){
         //     $widget.find('.btn-floskid').on('click', function(){
-        //     console.log('click')
         //     $(this).toggleClass('active')
         //     })
         // }
@@ -332,7 +318,6 @@ function init_new_widget(){
 function get_progress(){
     ajax_request('get_progress/', 'GET', 'get progress').done((data)=>{
         $.each(data.description, (index, value)=>{
-            console.log(value)
             $row = value.timestamp + ' - ' + value.description + '\n'
             $('#progress-description').val($('#progress-description').val()+$row)
         })
@@ -358,7 +343,6 @@ function datarangepicker_init($widget){
 
 // alarm datatable
 function alarm_table_init($widget){
-    console.log('alarm table init')
     var table = $($widget).find('.table').DataTable({
         bInfo : false,
         bLengthChange: false,
@@ -384,7 +368,6 @@ function alarm_table_init($widget){
         }
     });
     setInterval(function() {
-        console.log('reload table')
         table.ajax.reload()
     }, 1000)
 }
@@ -392,7 +375,6 @@ function alarm_table_init($widget){
 
 // alarm logs datatable
 function alarm_log_table_init($widget){
-    console.log('alarm log table init')
     var table = $($widget).find('.table').DataTable({
         bInfo : false,
         bLengthChange: false,
@@ -417,7 +399,6 @@ function alarm_log_table_init($widget){
         }
     });
     setInterval(function() {
-        console.log('reload table')
         table.ajax.reload()
     }, 1000)
 }
@@ -455,14 +436,12 @@ function tag_table_init($widget){
         }
     });
     setInterval(function() {
-        console.log('reload table')
         table.ajax.reload()
     }, 1000)
 }
 
 // reader table datatable
 function reader_table_init($widget){
-    console.log('init reader table') 
     var table = $($widget).find('.table').DataTable({
         bInfo : false,
         bLengthChange: false,
@@ -490,7 +469,6 @@ function reader_table_init($widget){
         ],
     });
     setInterval(function() {
-        console.log('reload table')
         table.ajax.reload()
     }, 1000)
 }

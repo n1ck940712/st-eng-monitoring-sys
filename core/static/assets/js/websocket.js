@@ -10,12 +10,10 @@ function connect_websocket(){
 
     chatSocket.onmessage = function(e) {
         var data = JSON.parse(e.data).data
-        console.log(data)
         if ((data.message_type == 'request input before process start') && (window.location.pathname == '/monitoring-sys/')){
             load_data_input_modal(data.message)
         }
         else if (data.message_type == 'prompt'){
-            console.log(data.message)
             load_prompt(data.message)
         }
         else if (data.message_type == 'close prompt'){
@@ -39,9 +37,6 @@ function connect_websocket(){
         else if ((data.message_type == 'deviation prompt') && (window.location.pathname == '/monitoring-sys/')){
             load_deviation_prompt(data.message)
         }
-        // else if ((data.message_type == 'force logout')){
-        //     force_logout()
-        // }
         else if ((data.message_type == 'sensor reading update')){
             update_sensor_reading(data.message)
         }
@@ -94,7 +89,6 @@ function force_logout(){
 function websocket_send(data){
     data.user_role = $('#user-role').val()
     data.recipient_ip = '127.0.0.1'
-    console.log(data)
     chatSocket.send(JSON.stringify({
         'data': data,
         'sender': 'UI',
@@ -136,12 +130,10 @@ $('#data-input-form').submit((e)=>{
         values[key] = $(this).val()
         if (key != 'start_process_name'){
             if (!reg.test($(this).val())){
-                console.log('regex test failed')
                 error_flag = true
             }
         }
     })
-    console.log(values)
     if (!error_flag){
         var data = {
             'message': values,
@@ -150,7 +142,6 @@ $('#data-input-form').submit((e)=>{
         websocket_send(data)
     }
     else {
-        console.log('non valid input detected ')
         $('#data-input-modal .modal-body-error').html('Invalid input')
     }
 })
@@ -241,13 +232,10 @@ function load_deviation_prompt(message){
 }
 
 function prompt_data_check(message){
-    console.log('prompt_data_check')
     $('#prompt-modal').modal('show')
     $('#prompt-modal .modal-body').html('').append(message.text)
     $('#prompt-modal #process-name').val(message.process_name)
-    console.log($('#prompt-modal #process-name').val())
     $.each(message.parameters, (index, value)=>{
-        console.log(index, value)
         $row = $(`
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -261,7 +249,6 @@ function prompt_data_check(message){
         $('#prompt-modal .modal-body').append($row)
     })
     $.each(message.set_parameters, (index, value)=>{
-        console.log(index, value)
         $row = $(`
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -313,12 +300,10 @@ function close_prompt(prompt=null){
 }
 
 function trigger_event(message){
-    console.log(message.event_name)
     data = {
         'event_name': message.event_name
     }
     ajax_request('trigger_event/', 'get', 'trigger event', {'event_name': message.event_name}).done((data)=>{
-        console.log(data)
         $('.grid-stack-item-content').html(data.html)
     })
 }
@@ -329,13 +314,10 @@ async function get_status(){
             $('.grid-stack-item').hide(0, async ()=>{
                 grid.removeAll()
                 await ajax_request('trigger_event/', 'get', 'get status').done((data)=>{
-                    console.log(data)
                     if (data.process_running){
-                        console.log('disable other pages')
                         $("a.nav-link").addClass('link-disabled')
                     }
                     else{
-                        console.log('enable other pages')
                         $("a.nav-link").removeClass('link-disabled')
                     }
                     load_widget($.parseJSON(data.layout))
@@ -349,15 +331,12 @@ async function get_status(){
         }
         else {
             await ajax_request('trigger_event/', 'get', 'get status').done((data)=>{
-                console.log(data)
                 load_widget($.parseJSON(data.layout))
                 $('.grid-stack-item-content').html(data.html)
                 if (data.process_running){
-                    console.log('disable other pages')
                     $("a.nav-link").addClass('link-disabled')
                 }
                 else{
-                    console.log('enable other pages')
                     $("a.nav-link").removeClass('link-disabled')
                 }
             })

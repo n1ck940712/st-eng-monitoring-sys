@@ -7,7 +7,6 @@
 $("head").append($("<script></script>").attr("src", "/static/assets/js/plugins/DataTables/datatables.js"));
 
 
-
 // ======================================================================================================
 // event listener
 // ======================================================================================================
@@ -27,14 +26,7 @@ $('#settings-wet-threshold').change(function () {
     $('#settings-wet-threshold-indicator').val($(this).val())
 });
 
-
-
-// modals ------------------------------------------------------------------------
-
-
-
 // post forms ------------------------------------------------------------------------
-
 
 // post settings changes to server
 $('#edit-default-values-form').submit((e)=>{
@@ -146,8 +138,6 @@ function post_default_value_changes(){
     $inputs.each(function() {
         var name = this.id.split('_')[0].replace(/-/g, ' ')
         var process = this.id.split('_')[1].replace(/-/g, ' ')
-        console.log('name:', name)
-        console.log('process:', process)
         values.push({'name': name, 'process': process, 'value': $(this).val()})
         // values[this.id.replace(/-/g,' ')] = $(this).val()
     })

@@ -140,7 +140,6 @@ def generate_report(process_name):
 
 
 def check_deviation(process):
-    log.debug('check_deviation started for process: %s' % (process))
     pressure_deviated = False
     temperature_deviated = False
     n2_flow_rate_deviated = False
@@ -172,10 +171,7 @@ def check_deviation(process):
             alert_message = ''
             if 'set pressure' in param_dict:
                 current_pressure = read_pressure()[0]
-                log.debug('current_pressure: %s' % current_pressure)
                 if abs(current_pressure - param_dict['set pressure']) > param_dict['pressure tolerance']:
-                    log.debug('pressure deviated (current pressure: %s | set pressure: %s | pressure tolerance: %s)' % (current_pressure, param_dict['set pressure'], param_dict['pressure tolerance']
-                    ))
                     alert_message += '&bull;pressure deviated (current: %skPa | set: %skPa | tolerance: %skPa)<br>' % (current_pressure, param_dict['set pressure'], param_dict['pressure tolerance']
                     )
                     pressure_deviated = True
@@ -184,9 +180,7 @@ def check_deviation(process):
                     
             if 'set n2 flow rate' in param_dict:
                 current_flow = read_flow()[0]
-                log.debug('current_flow: %s' % current_flow)
                 if abs(current_flow - param_dict['set n2 flow rate']) > param_dict['n2 flow rate tolerance']:
-                    log.debug('n2 flow rate deviated (current flow: %s | set flow: %s | flow tolerance: %s)' % (current_flow, param_dict['set n2 flow rate'], param_dict['n2 flow rate tolerance']))
                     alert_message += '&bull;n2 flow rate deviated (current: %sL/min | set: %sL/min | tolerance: %sL/min)<br>' % (current_flow, param_dict['set n2 flow rate'], param_dict['n2 flow rate tolerance'])
                     n2_flow_rate_deviated = True
                 else:
@@ -194,9 +188,7 @@ def check_deviation(process):
 
             if 'set temperature' in param_dict:
                 current_temperature = read_temperature()[0]
-                log.debug('current_temp: %s' % current_temperature)
                 if abs(current_temperature - param_dict['set temperature']) > param_dict['temperature tolerance']:
-                    log.debug('temperature deviated (current temperature: %s | set temperature: %s | temperature tolerance: %s)' % (current_temperature, param_dict['set temperature'], param_dict['temperature tolerance']))
                     alert_message += '&bull;temperature deviated (current: %s°C | set: %s°C | tolerance: %s°C)' % (current_temperature, param_dict['set temperature'], param_dict['temperature tolerance'])
                     temperature_deviated = True
                 else:
@@ -209,7 +201,6 @@ def check_deviation(process):
             else:
                 close_prompt(['deviation prompt',])
             next_check_time = datetime.now() + timedelta(seconds=5)
-    log.debug('check_deviation ended for %s' % process)
     close_prompt(['deviation prompt',])
     return
 
@@ -233,7 +224,6 @@ def logging_thread(process_name, logging_interval):
                 post_production_read(log_number)
             last_log_time = datetime.now()
         time.sleep(0.1)
-    log.debug('logging ended for %s' % process_name)
     return
 
 
@@ -277,7 +267,6 @@ def determine_send_all(data):
 def websocket_send(data):
     global ws
     recipient_ip = determine_send_all(data)
-    # log.debug('<SYSTEM> send to UI (%s): %s' % (recipient_ip, data))
     time.sleep(0.2)
     data['recipient_ip'] = recipient_ip
     ws.send(json.dumps({
@@ -289,7 +278,6 @@ def websocket_send(data):
 
 
 def update_database(message):
-    log.debug("<SYSTEM> updating database")
     for key in message:
         if key == 'start_process_name':
             process_name = message[key]
@@ -340,7 +328,6 @@ def show_prompt_data_check(text, wait_for_acknowledge, process_name='', paramete
             websocket_send(data)
             event.wait(5)
         if not pre_production_start_logging:
-            log.debug('<PRE PRODUCTION> flow set point reached')
             close_prompt(['notification prompt',])
             show_prompt('Pre Production', 'Flow rate set point reached. Start logging.')
             pre_production_start_logging = True
@@ -566,12 +553,10 @@ def get_batch_id():
 
 
 def pre_production_read(log_number):
-    log.debug('<PRE PRODUCTION LOOGING>')
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     batch_id = get_batch_id()
     flow, unit = read_flow()
     database.query('local', 'insert', 'INSERT INTO app_logdata (batch, type, flow, flow_unit, timestamp) VALUES ("%s", "%s", "%s", "%s", "%s")' % (batch_id, 'pre production', flow, unit, timestamp))
-    log.debug('<INSTRUMENTS> reading flow: %s (logged for report batch:%s)' % (flow, batch_id))
     if log_number == 'first':
         update_progress('pre production', 'Starting data point logged (%s%s).' % (flow, unit), 15.0)
         pass
@@ -581,7 +566,6 @@ def pre_production_read(log_number):
     return
 
 def production_read(log_number):
-    log.debug('<PRODUCTION LOOGING>')
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     batch_id = get_batch_id()
     flow, flow_unit = read_flow()
@@ -644,7 +628,6 @@ def progress_bar_update_temp(start_percentage, end_percentage, target_temp):
     return
 
 def post_production_read(log_number):
-    log.debug('<POST PRODUCTION LOOGING>')
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     batch_id = get_batch_id()
     flow, flow_unit = read_flow()
@@ -663,7 +646,6 @@ def read_temperature():
     row = database.query('local', 'get', 'SELECT value, `unit` FROM app_sensorreading WHERE name="temperature"')[0]
     value = float(row[0])
     unit = row[1]
-    # log.debug('<INSTRUMENTS> reading temperature:%s' % value)
     return value, unit
 
 
@@ -671,7 +653,6 @@ def read_flow():
     row = database.query('local', 'get', 'SELECT value, `unit` FROM app_sensorreading WHERE name="n2 flow rate"')[0]
     value = float(row[0])
     unit = row[1]
-    # log.debug('<INSTRUMENTS> reading flow: %s' % value)
     return value, unit
 
 
@@ -679,7 +660,6 @@ def read_pressure():
     row = database.query('local', 'get', 'SELECT value, `unit` FROM app_sensorreading WHERE name="pressure"')[0]
     value = float(row[0])
     unit = row[1]
-    # log.debug('<INSTRUMENTS> reading pressure: %s' % value)
     return value, unit
 
 def log_heater_set_point(value):
@@ -690,13 +670,11 @@ def log_heater_set_point(value):
     return
 
 def flow_control(set):
-    log.debug('<INSTRUMENTS> set flow controller: %s' % set)
     database.query('local', 'update', 'UPDATE app_sensorreading SET set_point=%s, status="1" WHERE name="n2 flow rate"' % set)
     return
 
 
 def trigger_event(event_name=''):
-    log.debug('<SYSTEM> trigger event')
     data = {
         'message': {
             'event_name': event_name,
@@ -714,7 +692,6 @@ def reaffirm_cancel_operation():
 def reset_operation():
     global process_run
     report_generated = False
-    log.debug('<RESET ALL OPERATION>')
     latest_log = database.query('local', 'get', 'SELECT batch, type FROM app_logdata ORDER BY batch DESC LIMIT 1')
     if len(latest_log) > 0:
         latest_log_batch_id = latest_log[0][0]
@@ -750,7 +727,6 @@ def reset_operation():
     return
 
 def show_prompt_data_input(title, text, parameter, process_name='', button_text='Proceed'):
-    log.debug('<%s> prompt for data input: (%s)' % (process_name.upper(), parameter))
     variables_list = []
     for param in parameter:
         par = database.query('local', 'get', 'SELECT name, value, unit FROM app_variabledefault WHERE process="%s" AND name="%s" ORDER BY name ASC' % (process_name, param))[0]
@@ -814,7 +790,6 @@ class pre_production(threading.Thread):
         pre_production_start_logging = False
 
         # start
-        log.debug('<PRE PRODUCTION> START')
         process_list_manage('data input', 'pre production')
         time.sleep(0.5)
         trigger_event()
@@ -829,10 +804,10 @@ class pre_production(threading.Thread):
         # wait submit data input
         while not pre_production_receive_input and process_run:
             event.wait(1)
+
         if not process_run:
-            log.debug('<PRE PRODUCTION> END')
             return
-        log.debug('<PRE PRODUCTION> <purging> waiting flow rate to reach set point')
+            
         process_list_manage('waiting to log', 'pre production')
         n2_flow = get_variable('n2 flow rate', 'pre production')[0]
         flow_control(n2_flow) # activate flow controller, wait for flow to reach set point or bypass by user
@@ -842,7 +817,7 @@ class pre_production(threading.Thread):
         # start logging
         while not pre_production_start_logging:
             event.wait(0.1)
-        log.debug('<PRE PRODUCTION> <purging> starts logging')
+
         pre_production_start_time = datetime.now()
         purging_duration = get_variable('purging duration', 'pre production')[0]
         process_list_manage('logging', 'pre production')
@@ -850,28 +825,24 @@ class pre_production(threading.Thread):
         pre_production_read('first') # read flow at start of purging
         update_progress('pre production', 'Waiting for %s minutes to log end pressure.' % purging_duration, 15.0)
         threading.Thread(target=progress_bar_update, args=(15, 95, purging_duration)).start()
-        log.debug('<PRE PRODUCTION> <purging> Waiting %s min' % purging_duration)
         while (datetime.now()-pre_production_start_time).total_seconds() < (purging_duration*60) and process_run:
             event.wait(0.1)
+            
         if process_run:
             process_run = False
             pre_production_read('last') # read flow at end of purging
-            log.debug('<PRE PRODUCTION> purging COMPLETED')
             process_list_manage('waiting to release vacuum', 'pre production')
             update_progress('pre production', 'Process duration reached.', 95.0)
             close_prompt('all')
             time.sleep(1)
             show_prompt('Pre Production', 'Purging duration reached. Waiting for deactivation of flow controller', True, 'pre production deactivate flow')
-            
             time.sleep(1.5)
-            
-            log.debug('<PRE PRODUCTION> Trigger alarm')
         else:
-            log.debug('<PRE PRODUCTION> END')
             return
 
         while not deactivate_flow_pre_production:
             event.wait(0.1)
+
         update_progress('pre production', 'Deactivating nitrogen flow controller.', 100)
         flow_control(0)
         process_list_manage('waiting to release vacuum', 'pre production')
@@ -883,8 +854,6 @@ class pre_production(threading.Thread):
         trigger_event()
         update_progress('', '', 0, True)
         generate_report('pre production')
-        
-        log.debug('<PRE PRODUCTION> END')
         return
 
 
@@ -908,7 +877,6 @@ class production(threading.Thread):
         release_vacuum_production_3 = False
 
         # start
-        log.debug('<PRODUCTION> START')
         process_list_manage('data input', 'production_part_1')
         time.sleep(0.5)
         trigger_event()
@@ -916,17 +884,15 @@ class production(threading.Thread):
         update_progress('production part 1', 'Production part 1 has started', 5.0, True)
         show_prompt('Production Part 1', 'Production part 1 has started')
         time.sleep(3.1)
-
-        # data input
         show_prompt_data_input('Production Part 1', '', ['n2 flow rate', 'target temperature', 'logging interval', 'heater set point'], 'production part 1', 'Start process part 1')
 
         # wait submit data input
         while not production_1_receive_input and process_run:
             event.wait(0.1)
+
         if not process_run:
-            log.debug('<PRODUCTION> END')
             return
-        log.debug('<PRODUCTION> <PART 1> waiting for user acknowledgement to start logging.')
+            
         process_list_manage('waiting to log', 'production_part_1')
         n2_flow = get_variable('n2 flow rate', 'production part 1')[0]
         flow_control(n2_flow) # activate flow controller, wait for manual input by user
@@ -937,12 +903,11 @@ class production(threading.Thread):
         # start logging
         while not production_1_start_logging:
             event.wait(0.1)
+            
         part_1_start_time = datetime.now()
-        log.debug('<PRODUCTION> <PART 1> starts logging')
         process_list_manage('logging', 'production_part_1')
         logging_interval = get_variable('logging interval', 'production part 1')[0]
         target_temp = get_variable('target temperature', 'production part 1')[0]
-        log.debug('<PRODUCTION> <PART 1> data logged every %s min' % logging_interval)
         update_progress('production part 1', 'Logging started (log every %s min).' % logging_interval, 10.0)
         current_temp = 0
         _logging = threading.Thread(target=logging_thread, args=('production part 1', logging_interval))
@@ -954,21 +919,19 @@ class production(threading.Thread):
         while (current_temp < target_temp) and process_run:
             current_temp = read_temperature()[0]
             event.wait(0.1)
+
         if process_run:
             process_run = False
             _logging.join()
             check_deviation_thread.join()
-            log.debug('<PRODUCTION> <PART 1> current temperature reached set temperature')
             update_progress('production part 1', 'Target temperature reached. Waiting for change of heater set point.', 90.0)
             show_prompt_data_input('Production Part 1', 'Target temperature reached. Waiting for change of heater set point.', ['heater set point',], 'production part 2', 'Heater set point changed')
-            log.debug('<PRODUCTION> <PART 1> Trigger alarm')
             trigger_alarm()
 
             # wait change heater set point production part 1
             while not change_heater_set_production_1:
                 event.wait(0.1)
-            log.debug('<PRODUCTION> <PART 1> Heater set point changed')
-            log.debug('<PRODUCTION> <PART 1> COMPLETED')
+                
             update_progress('production part 1', 'Heater set point changed', 95.0)
             production_read('last')
             process_list_manage('logging', 'production_part_1')
@@ -979,13 +942,14 @@ class production(threading.Thread):
             time.sleep(1)
             show_prompt('Production Part 1', 'Production part 1 completed.', True, 'start production part 2', 'Start process part 2')
         else:
-            log.debug('<PRODUCTION> END')
             return
 
         # wait start production part 2
         process_run = True
+
         while not start_production_2:
             event.wait(0.1)
+            
         process_list_manage('data input', 'production_part_2')
         update_progress('', '', 0, True)
         time.sleep(0.5)
@@ -997,50 +961,50 @@ class production(threading.Thread):
         # wait submit data input
         while not production_2_receive_input and process_run:
             event.wait(0.1)
+
         if not process_run:
-            log.debug('<PRODUCTION> END')
             return
-        log.debug('<PRODUCTION> <PART 2> waiting for user acknowledgement to start logging.')
+
         process_list_manage('waiting to log', 'production_part_2')
         threading.Thread(target=show_prompt_data_check, args=('Waiting to start logging', True, 'production part 2 logging')).start()
 
         # start logging
         while not production_2_start_logging:
             event.wait(0.1)
-        log.debug('<PRODUCTION> <PART 2> starts logging')
+
         process_list_manage('logging', 'production_part_2')
         logging_interval = get_variable('logging interval', 'production part 2')[0]
         process_duration = get_variable('process duration', 'production part 2')[0]
-        log.debug('<PRE PRODUCTION> <PART 2> data logged every %s min for %s min from start of process 1' % (logging_interval, process_duration))
         update_progress('production part 2', 'Logging started (log every %s min for %s min from start of process 1).' % (logging_interval, process_duration), 10.0)
         _logging = threading.Thread(target=logging_thread, args=('production part 2', logging_interval))
         check_deviation_thread = threading.Thread(target=check_deviation, args=('production part 2',))
         _logging.start()
         check_deviation_thread.start()
         threading.Thread(target=progress_bar_update, args=(10, 95, process_duration)).start()
+        
         while ((datetime.now() - part_1_start_time).total_seconds() < process_duration * 60) and process_run:
             time.sleep(0.1)
+
         if process_run:
             process_run = False
             _logging.join()
             check_deviation_thread.join()
             production_read('last')
-            log.debug('<PRE PRODUCTION> <PART 2> COMPLETED')
             process_list_manage('logging', 'production_part_2')
             update_progress('production part 2', 'Production part 2 completed.', 100)
             close_prompt('all')
             time.sleep(1)
             show_prompt('Production Part 2', 'Process part 2 completed.', True, 'start production part 3')
-            log.debug('<PRE PRODUCTION> <PART 2> Trigger alarm')
             trigger_alarm()
         else:
-            log.debug('<PRODUCTION> END')
             return
         
         # wait to start production part 3
         process_run = True
+        
         while not start_production_3:
             event.wait(0.1)
+
         process_list_manage('data input', 'production_part_3')
         update_progress('', '', 0, True)
         time.sleep(0.5)
@@ -1052,10 +1016,10 @@ class production(threading.Thread):
         # wait submit data input production part 3
         while not production_3_receive_input and process_run:
             event.wait(0.1)
+
         if not process_run:
-            log.debug('<PRODUCTION> END')
             return
-        log.debug('<PRODUCTION> <PART 3> waiting for user acknowledgement to start logging.')
+
         process_list_manage('waiting to log', 'production_part_3')
         update_progress('production part 3', 'Waiting for user acknowledgement to start logging.', 5)
         flow_control(get_variable('n2 flow rate', 'production part 3')[0])
@@ -1064,40 +1028,39 @@ class production(threading.Thread):
         # start logging production part 3
         while not production_3_start_logging:
             event.wait(0.1)
+
         part_3_start_time = datetime.now()
-        log.debug('<PRODUCTION> <PART 3> starts logging')
         process_list_manage('logging', 'production_part_3')
         logging_interval = get_variable('logging interval', 'production part 3')[0]
         process_duration = get_variable('process duration', 'production part 3')[0]
-        log.debug('<PRE PRODUCTION> <PART 3> data logged every %s min for %s min' % (logging_interval, process_duration))
         update_progress('production part 3', 'Logging started (log every %smin for %smin).' % (logging_interval, process_duration), 10)
         _logging = threading.Thread(target=logging_thread, args=('production part 3', logging_interval))
         check_deviation_thread = threading.Thread(target=check_deviation, args=('production part 3',))
         _logging.start()
         check_deviation_thread.start()
         threading.Thread(target=progress_bar_update, args=(10, 95, process_duration)).start()
+        
         while ((datetime.now() - part_3_start_time).total_seconds() < process_duration * 60) and process_run:
             time.sleep(0.1)
+
         if process_run:
             process_run = False
             check_deviation_thread.join()
             _logging.join()
             production_read('last')
-            log.debug('<PRE PRODUCTION> <PART 3> COMPLETED')
             process_list_manage('waiting to release vacuum', 'production_part_3')
             update_progress('production part 3', 'Process part 3 completed. Waiting for release of vacuum.', 95)
             close_prompt('all')
             time.sleep(1)
             threading.Thread(target=show_prompt_data_check, args=('Process part 3 completed. Waiting for release of vacuum.', True, 'production part 3 wait vacuum release', ['pressure',], 'Vacuum Released. Deactivate  N2 flow')).start()
-            log.debug('<PRE PRODUCTION> <PART 3> Trigger alarm')
             trigger_alarm()
         else:
-            log.debug('<PRODUCTION> END')
             return
             
         # end production
         while not release_vacuum_production_3:
             event.wait(0.1)
+
         update_progress('production part 3', 'Vacuum released. Deactivating nitrogen flow controller.', 100)
         flow_control(0)
         process_list_manage('waiting to release vacuum', 'production_part_3')
@@ -1110,7 +1073,6 @@ class production(threading.Thread):
         generate_report('production')
         update_progress('', '', 0, True)
             
-        log.debug('<PRODUCTION> END')
         return
 
 
@@ -1125,10 +1087,8 @@ class post_production_1(threading.Thread):
         global process_run, post_production_1_receive_input
         process_run = True
         post_production_1_receive_input = False
-        
-        # start
 
-        log.debug('<POST PRODUCTION> <DAY 1> START')
+        # start
         process_list_manage('data input', 'post_production_day_1')
         time.sleep(0.5)
         trigger_event()
@@ -1136,36 +1096,33 @@ class post_production_1(threading.Thread):
         update_progress('post production day 1', 'Post production day 1 has started', 5.0)
         show_prompt('Post Production Day 1', 'Post Production Day 1 has started')
         time.sleep(3.1)
-
         # data input
         show_prompt_data_input('Post Production Day 1', '', ['process duration', 'logging interval'], 'post production day 1', 'Start day 1 cleaning')
 
         # wait submit data input
         while not post_production_1_receive_input and process_run:
             event.wait(0.1)
+
         if not process_run:
-            log.debug('<POST PRODUCTION> <DAY 1> END')
             return
 
         post_production_day_1_start_time = datetime.now()
-        log.debug('<POST PRODUCTION> <DAY 1> starts logging')
         process_list_manage('logging', 'post_production_day_1')
         logging_interval = get_variable('logging interval', 'post production day 1')[0]
         process_duration = get_variable('process duration', 'post production day 1')[0]
-        log.debug('<POST PRODUCTION> <DAY 1> data logged every %s min for %s min' % (logging_interval, process_duration))
         update_progress('post production day 1', 'Logging started (log every %s min for %s min).' % (logging_interval, process_duration), 10.0)
         _logging = threading.Thread(target=logging_thread, args=('post production', logging_interval))
         _logging.start()
         threading.Thread(target=progress_bar_update, args=(10, 95, process_duration)).start()
+
         while ((datetime.now() - post_production_day_1_start_time).total_seconds() < process_duration * 60) and process_run:
             time.sleep(0.1)
+
         if process_run:
             process_run = False
             _logging.join()
             post_production_read('last')
             update_progress('post production day 1', 'Process duration reached.', 100.0)
-            log.debug('<POST PRODUCTION> <DAY 1> process duration reached')
-            log.debug('<POST PRODUCTION> <DAY 1> COMPLETED')
             process_list_manage('waiting to start day 2', 'post_production_wait_day_2')
             time.sleep(0.5)
             trigger_event()
@@ -1173,13 +1130,10 @@ class post_production_1(threading.Thread):
             close_prompt('all')
             time.sleep(1)
             show_prompt('Post Production Day 1', 'Day 1 cleaning completed', True, '')
-            log.debug('<POST PRODUCTION> <DAY 1> Trigger alarm')
             trigger_alarm()
         else:
-            log.debug('<POST PRODUCTION> <DAY 1> END')
             return
         
-        log.debug('<POST PRODUCTION> <DAY 1> END')
         return
 
     
@@ -1193,7 +1147,6 @@ class post_production_2(threading.Thread):
         post_production_2_receive_input = False
 
         # start
-        log.debug('<POST PRODUCTION> <DAY 2> START')
         process_list_manage('data input', 'post_production_day_2')
         time.sleep(0.5)
         trigger_event()
@@ -1208,28 +1161,27 @@ class post_production_2(threading.Thread):
         # wait submit data input
         while not post_production_2_receive_input and process_run:
             event.wait(0.1)
+
         if not process_run:
-            log.debug('<POST PRODUCTION> <DAY 2> END')
             return
+
         post_production_day_2_start_time = datetime.now()
-        log.debug('<POST PRODUCTION> <DAY 2> starts logging')
         process_list_manage('logging', 'post_production_day_2')
         logging_interval = get_variable('logging interval', 'post production day 2')[0]
         process_duration = get_variable('process duration', 'post production day 2')[0]
-        log.debug('<POST PRODUCTION> <DAY 2> data logged every %s min for %s min' % (logging_interval, process_duration))
         update_progress('post production day 2', 'Logging started (log every %s min for %s min).' % (logging_interval, process_duration), 5.0)
         _logging = threading.Thread(target=logging_thread, args=('post production', logging_interval))
         _logging.start()
         threading.Thread(target=progress_bar_update, args=(10, 95, process_duration)).start()
+
         while ((datetime.now() - post_production_day_2_start_time).total_seconds() < process_duration * 60) and process_run:
             time.sleep(0.1)
+
         if process_run:
             process_run = False
             _logging.join()
             post_production_read('last')
             update_progress('post production day 2', 'Process duration reached.', 100.0)
-            log.debug('<POST PRODUCTION> <DAY 2> process duration reached')
-            log.debug('<POST PRODUCTION> <DAY 2> COMPLETED')
             process_list_manage('waiting to start day 3', 'post_production_wait_day_3')
             time.sleep(0.5)
             trigger_event()
@@ -1237,13 +1189,10 @@ class post_production_2(threading.Thread):
             close_prompt('all')
             time.sleep(1)
             show_prompt('Post Production Day 2', 'Day 2 cleaning completed', True, '')
-            log.debug('<POST PRODUCTION> <DAY 2> Trigger alarm')
             trigger_alarm()
         else:
-            log.debug('<POST PRODUCTION> <DAY 2> END')
             return
         
-        log.debug('<POST PRODUCTION> <DAY 2> END')
         return
 
 
@@ -1258,7 +1207,6 @@ class post_production_3(threading.Thread):
         post_production_3_receive_input = False
 
         # start
-        log.debug('<POST PRODUCTION> <DAY 3> START')
         process_list_manage('data input', 'post_production_day_3')
         time.sleep(0.5)
         trigger_event()
@@ -1266,35 +1214,33 @@ class post_production_3(threading.Thread):
         update_progress('post production day 3', 'Post production day 3 has started', 5.0)
         show_prompt('Post Production Day 3', 'Post production day 3 started.')
         time.sleep(3.1)
-
         # data input
         show_prompt_data_input('Post Production Day 3', '', ['process duration', 'logging interval'], 'post production day 3', 'Start day 3 drying')
 
         # wait submit data input
         while not post_production_3_receive_input and process_run:
             event.wait(0.1)
+
         if not process_run:
-            log.debug('<POST PRODUCTION> <DAY 3> END')
             return
+
         post_production_day_3_start_time = datetime.now()
-        log.debug('<POST PRODUCTION> <DAY 3> starts logging')
         process_list_manage('logging', 'post_production_day_3')
         logging_interval = get_variable('logging interval', 'post production day 3')[0]
         process_duration = get_variable('process duration', 'post production day 3')[0]
-        log.debug('<POST PRODUCTION> <DAY 3> data logged every %s min for %s min' % (logging_interval, process_duration))
         update_progress('post production day 3', 'Logging started (log every %s min for %s min).' % (logging_interval, process_duration), 5.0)
         _logging = threading.Thread(target=logging_thread, args=('post production', logging_interval))
         _logging.start()
         threading.Thread(target=progress_bar_update, args=(10, 95, process_duration)).start()
+
         while ((datetime.now() - post_production_day_3_start_time).total_seconds() < process_duration * 60) and process_run:
             time.sleep(0.1)
+
         if process_run:
             process_run = False
             _logging.join()
             post_production_read('last')
             update_progress('post production day 3', 'Process duration reached.', 100.0)
-            log.debug('<POST PRODUCTION> <DAY 3> process duration reached')
-            log.debug('<POST PRODUCTION> <DAY 3> COMPLETED')
             process_list_manage('logging', 'post_production_day_3')
             time.sleep(0.5)
             trigger_event()
@@ -1302,15 +1248,11 @@ class post_production_3(threading.Thread):
             close_prompt('all')
             time.sleep(1)
             show_prompt('Post Production Day 3', 'Day 3 cleaning completed. Report generated.', True, 'end post production')
-            log.debug('<POST PRODUCTION> <DAY 3> Trigger alarm')
             trigger_alarm()
-            log.debug('<POST PRODUCTION> <DAY 3> END')
             generate_report('post production')
         else:
-            log.debug('<POST PRODUCTION> <DAY 3> END')
             return
         
-        log.debug('<POST PRODUCTION> <DAY 3> END')
         return
         
  
@@ -1324,7 +1266,6 @@ class sensor_reading_update(threading.Thread):
 
     def run(self):
         global ws
-        log.info("sensor_reading_update STARTED")
         while 1:
             try:
                 data = {
@@ -1347,7 +1288,6 @@ class connection_thread(threading.Thread):
 
     def run(self):
         global ws
-        log.info("connection_thread started")
         while 1:
             try:
                 ws_url = "ws://0.0.0.0:8001/ws/socket/" # production
@@ -1366,12 +1306,11 @@ class connection_thread(threading.Thread):
         websocket_connected = True
 
     def on_error(self, ws, error):
-        log.debug('on_error. %s' % (error))
+        log.error('on_error. %s' % (error))
 
     def on_close(self, ws, close_status_code, close_msg):
         global websocket_connected
         websocket_connected = False
-        log.debug('on_close. %s. %s' % (close_status_code, close_msg))
 
     def on_message(self, ws, data):
         decoded_data = json.loads(data)
@@ -1379,7 +1318,6 @@ class connection_thread(threading.Thread):
         
         if message_type != 'sessions':
             global recipient_ip, pre_production_receive_input, production_1_receive_input, production_1_start_logging, change_heater_set_production_1, start_production_2, production_2_receive_input, production_2_start_logging, start_production_3, production_3_receive_input, production_3_start_logging, release_vacuum_production_3, post_production_1_receive_input, post_production_2_receive_input, post_production_3_receive_input, deactivate_flow_pre_production
-            log.debug('<FROM UI>: ---> %s' % (data))
             recipient_ip = decoded_data['data']['sender_ip']
             user_role = decoded_data['data']['user_role']
             message = decoded_data['data']['message']
@@ -1458,9 +1396,7 @@ class connection_thread(threading.Thread):
             elif message_type == 'request export':
                 if user_role in ['Engineer', 'Super Admin', 'Guest', 'Technician']:
                     if len(message) > 0:
-                        log.debug('exporting')
                         result = report.export_usb(log, message)
-                        log.debug('report export response code: %s (0-ok, 1-error, 2-usb storage not found)' % result)
                         report_export_response(result)
                 else:
                     show_prompt('', 'Not authorised. Please log in.')

@@ -240,6 +240,7 @@ def generate(log, batch_id, variable_list=None):
                 table_row_num = 0
                 process_day = 1
                 first_row = True
+                
                 for row in rows:
                     table_row_num += 1
                     if process_day <= 3 and table_row_num <= 10:
@@ -269,22 +270,23 @@ def generate(log, batch_id, variable_list=None):
         if valid_data:
             if variable_list:
                 report_name_query = database.query('local', 'get', 'SELECT file_name FROM app_report WHERE id=%s' % batch_id)
+
                 if len(report_name_query) > 0:
                     report_name = report_name_query[0][0]
                     file_path = "/home/pi/monitoring_sys/core/static/assets/reports/%s.pdf" % report_name
                     subprocess.run(['sudo', 'rm', file_path])
                     f.render(file_path)
-                    log.info('Report edited: %s' % report_name)
+                    
             else:
                 file_path = Path("/home/pi/monitoring_sys/core/static/assets/reports/%s.pdf" % report_name)
+
                 while file_path.is_file():
-                    log.debug('Report file name exist')
                     report_name += '(1)'
                     file_path = Path("/home/pi/monitoring_sys/core/static/assets/reports/%s.pdf" % report_name)
                     
                 f.render(file_path)
-                log.info('Report generated: %s' % report_name)
                 database.query('local', 'update', 'UPDATE app_report SET file_name="%s" WHERE id=%s' % (report_name, batch_id))
+                
             return 0
     else:
         log.error('Trying to generate report but no report data found.')

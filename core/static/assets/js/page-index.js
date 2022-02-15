@@ -16,7 +16,6 @@ $("head").append($("<script></script>").attr("src", "/static/assets/js/websocket
 
 // get widget layout save state
 $('.grid-stack').ready(async ()=>{
-    console.log('grid stack ready')
     init_gridstack()
     // await get_widget_save()
     disable_widget_edit()
@@ -57,11 +56,11 @@ $('#add-widget-form').submit(async (e)=>{
     insert_new_widget(0, 0, widget_size.gs_w, widget_size.gs_h, widget_type, widget_id, widget_name)
     await insert_widget_html(widget_id, widget_type, widget_name)
     // init_new_widget('single', widget_id, widget_type)
+    
 })
 
 // clear 'add widget' form when modal is reopened
 $('.add_widget_open_modal').click(function(){
-    console.log('clear')
     $('#add-device-section').hide()
     $('.custom-select').find('.widget_option').remove()
     $('#add_widget_name').val('')
@@ -86,7 +85,6 @@ function load_available_widget(widget) {
 
 //gridstack enter widget edit
 function enter_widget_edit(){
-    console.log('Enter widget edit mode')
     $('.add_widget_open_modal').fadeIn()
     $('.edit-widget').fadeOut()
     $('.confirm-edit-widget').fadeIn()
@@ -98,7 +96,6 @@ function enter_widget_edit(){
 
 //gridstack exit widget edit
 function exit_widget_edit(){
-    console.log('Exit widget edit mode')
     $('.add_widget_open_modal').fadeOut()
     $('.edit-widget').fadeIn()
     $('.confirm-edit-widget').fadeOut()
