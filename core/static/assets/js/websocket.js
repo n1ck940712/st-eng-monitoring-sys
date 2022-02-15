@@ -1,14 +1,5 @@
 $(document).ready(()=>{
     connect_websocket()
-    data = {
-        'title': '',
-        'text': 'test titletest',
-        // 'text': 'test titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest title',
-        'process_name': 'test title',
-        'button_text': 'test title',
-        'wait_for_acknowledge': true,
-    }
-    load_prompt(data)
 })
 
 function connect_websocket(){
