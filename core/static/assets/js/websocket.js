@@ -1,5 +1,14 @@
 $(document).ready(()=>{
     connect_websocket()
+    data = {
+        'title': '',
+        'text': 'test titletest',
+        // 'text': 'test titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest titletest title',
+        'process_name': 'test title',
+        'button_text': 'test title',
+        'wait_for_acknowledge': true,
+    }
+    load_prompt(data)
 })
 
 function connect_websocket(){
@@ -187,7 +196,7 @@ $('#confirmation-form').submit((e)=>{
 function load_data_input_modal(message){
     $('#data-input-modal .modal-body-error').html('')
     $('#data-input-modal #data-input-modal-title').html('').append(message.title.toUpperCase())
-    $('#data-input-modal .modal-body-text').html('').append(message.text)
+    $('#data-input-modal .modal-body-text').html(`<span>${message.text}</span>`)
     $('#data-input-modal .button-proceed').html(message.button_text)
     $input = `<input hidden type="text" id="start-process-name" value="${message.process_name}" required>`
     $('#data-input-form').html('').append($input)
@@ -208,11 +217,15 @@ function load_data_input_modal(message){
 }
 
 function load_prompt(message){
-    $('#prompt-modal #prompt-title').html('').append(message.title.toUpperCase())
-    $('#prompt-modal .modal-body').html('').append(message.text)
+    if ((typeof message.title !== 'undefined') && (message.title !== '')){
+        $('#prompt-modal #prompt-title').html(message.title.toUpperCase())
+    }
+    else{
+        $('#prompt-modal #prompt-title').html('System Dialog')
+    }
+    $('#prompt-modal .modal-body').html(`<span>${message.text}</span>`)
     $('#prompt-modal #process-name').val(message.process_name)
     $('#prompt-modal .button-proceed').html(message.button_text)
-    $('#prompt-modal').modal('show')
     if (message.wait_for_acknowledge){
         $('#prompt-modal .modal-footer').attr("hidden", false)
     }
@@ -222,18 +235,29 @@ function load_prompt(message){
             $('#prompt-modal').modal('hide')
         }, 3000)
     }
+    $('#prompt-modal').modal('show')
 }
 
 function load_deviation_prompt(message){
-    $('#deviation-modal #deviation-title').html('').append(message.title.toUpperCase())
-    $('#deviation-modal .modal-body').html('').append(message.text)
+    if (typeof message.title !== 'undefined'){
+        $('#deviation-modal #deviation-title').html(message.title.toUpperCase())
+    }
+    else{
+        $('#deviation-modal #deviation-title').html('Readings Deviated')
+    }
+    $('#deviation-modal .modal-body').html(`<span>${message.text}</span>`)
     $('#deviation-modal #process-name').val(message.process_name)
     $('#deviation-modal').modal('show')
 }
 
 function prompt_data_check(message){
-    $('#prompt-modal').modal('show')
-    $('#prompt-modal .modal-body').html('').append(message.text)
+    if (typeof message.title !== 'undefined'){
+        $('#prompt-modal #prompt-title').html(message.title.toUpperCase())
+    }
+    else{
+        $('#prompt-modal #prompt-title').html('System Dialog')
+    }
+    $('#prompt-modal .modal-body').html(`<span>${message.text}</span>`)
     $('#prompt-modal #process-name').val(message.process_name)
     $.each(message.parameters, (index, value)=>{
         $row = $(`
@@ -263,6 +287,7 @@ function prompt_data_check(message){
     })
     $('#prompt-modal .modal-footer').attr("hidden", false)
     $('#prompt-modal .button-proceed').html(message.button_text)
+    $('#prompt-modal').modal('show')
 }
 
 function prompt_data_check_update(message){
@@ -366,7 +391,7 @@ $('.cancel-operation').click(()=>{
 })
 
 function load_confirm_prompt(message){
-    $('#confirmation-modal .modal-body').html('').append(message.text)
+    $('#confirmation-modal .modal-body').html(`<span>${message.text}</span>`)
     $('#confirmation-modal').modal('show')
     $('#confirmation-modal #confirmation-process-name').val(message.process_name)
 }
