@@ -590,7 +590,10 @@ def progress_bar_update(start_percentage, end_percentage, process_duration):
     while process_run:
         if (datetime.now() - last_update).total_seconds() > 10:
             time_elapsed_seconds = (datetime.now() - start_time).total_seconds()
-            progress_made = time_elapsed_seconds / (process_duration*60)
+            if process_duration == 0:
+                progress_made = 1.0
+            else:
+                progress_made = time_elapsed_seconds / (process_duration*60)
             percentage = (end_percentage - start_percentage) * progress_made
             database.query('local', 'update', 'UPDATE app_progress SET percentage=%s' % (start_percentage + percentage))
             websocket_send(data = {
@@ -674,10 +677,10 @@ def flow_control(set):
     return
 
 
-def trigger_event(event_name=''):
+def trigger_event(event=''):
     data = {
         'message': {
-            'event_name': event_name,
+            'event': event,
         },
         'message_type': 'trigger event',
     }
@@ -791,15 +794,8 @@ class pre_production(threading.Thread):
 
         # start
         process_list_manage('data input', 'pre production')
-        time.sleep(0.5)
-        trigger_event()
-        time.sleep(0.5)
-        show_prompt('Pre Production', 'Pre production has started')
+        trigger_event('pre production started')
         update_progress('pre production', 'Pre production has started', 10.0, True)
-        time.sleep(3.1)
-
-        # data input
-        show_prompt_data_input('Pre production', 'Waiting to start purging process', ['n2 flow rate', 'purging duration'], 'pre production', 'Start purging')
 
         # wait submit data input
         while not pre_production_receive_input and process_run:
@@ -833,10 +829,8 @@ class pre_production(threading.Thread):
             pre_production_read('last') # read flow at end of purging
             process_list_manage('waiting to release vacuum', 'pre production')
             update_progress('pre production', 'Process duration reached.', 95.0)
-            close_prompt('all')
-            time.sleep(1)
-            show_prompt('Pre Production', 'Purging duration reached. Waiting for deactivation of flow controller', True, 'pre production deactivate flow')
-            time.sleep(1.5)
+            trigger_event('pre production purging duration reached')
+            # time.sleep(1.5)
         else:
             return
 
@@ -846,17 +840,11 @@ class pre_production(threading.Thread):
         update_progress('pre production', 'Deactivating nitrogen flow controller.', 100)
         flow_control(0)
         process_list_manage('waiting to release vacuum', 'pre production')
-        time.sleep(1.5)
-        close_prompt('all')
-        time.sleep(1)
-        show_prompt('Pre Production', 'Pre production completed. Report generated.', True, 'end pre production')
+        trigger_event('pre production completed')
         trigger_alarm()
-        trigger_event()
         update_progress('', '', 0, True)
         generate_report('pre production')
         return
-
-
 
 # production part 1
 class production(threading.Thread):
@@ -878,13 +866,8 @@ class production(threading.Thread):
 
         # start
         process_list_manage('data input', 'production_part_1')
-        time.sleep(0.5)
-        trigger_event()
-        time.sleep(0.5)
+        trigger_event('production part 1 start')
         update_progress('production part 1', 'Production part 1 has started', 5.0, True)
-        show_prompt('Production Part 1', 'Production part 1 has started')
-        time.sleep(3.1)
-        show_prompt_data_input('Production Part 1', '', ['n2 flow rate', 'target temperature', 'logging interval', 'heater set point'], 'production part 1', 'Start process part 1')
 
         # wait submit data input
         while not production_1_receive_input and process_run:
@@ -938,9 +921,7 @@ class production(threading.Thread):
             time.sleep(1)
             trigger_alarm()
             update_progress('production part 1', 'Production part 1 completed.', 100)
-            close_prompt('all')
-            time.sleep(1)
-            show_prompt('Production Part 1', 'Production part 1 completed.', True, 'start production part 2', 'Start process part 2')
+            trigger_event('production part 1 end')
         else:
             return
 
@@ -952,11 +933,8 @@ class production(threading.Thread):
             
         process_list_manage('data input', 'production_part_2')
         update_progress('', '', 0, True)
-        time.sleep(0.5)
-        trigger_event()
-        time.sleep(0.5)
+        trigger_event('production part 2 start')
         update_progress('production part 2', 'Production part 2 started.', 5.0)
-        show_prompt_data_input('Production Part 2', '',['logging interval', 'process duration', 'heater set point'], 'production part 2', 'start process part 2')
 
         # wait submit data input
         while not production_2_receive_input and process_run:
@@ -992,9 +970,7 @@ class production(threading.Thread):
             production_read('last')
             process_list_manage('logging', 'production_part_2')
             update_progress('production part 2', 'Production part 2 completed.', 100)
-            close_prompt('all')
-            time.sleep(1)
-            show_prompt('Production Part 2', 'Process part 2 completed.', True, 'start production part 3')
+            trigger_event('production part 2 end')
             trigger_alarm()
         else:
             return
@@ -1007,11 +983,8 @@ class production(threading.Thread):
 
         process_list_manage('data input', 'production_part_3')
         update_progress('', '', 0, True)
-        time.sleep(0.5)
-        trigger_event()
-        time.sleep(0.5)
+        trigger_event('production part 3 start')
         update_progress('production part 3', 'Production part 3 started.', 5)
-        show_prompt_data_input('Production Part 3', '', ['n2 flow rate', 'logging interval', 'process duration', 'heater set point'], 'production part 3', 'Start process part 3')
     
         # wait submit data input production part 3
         while not production_3_receive_input and process_run:
@@ -1052,7 +1025,7 @@ class production(threading.Thread):
             update_progress('production part 3', 'Process part 3 completed. Waiting for release of vacuum.', 95)
             close_prompt('all')
             time.sleep(1)
-            threading.Thread(target=show_prompt_data_check, args=('Process part 3 completed. Waiting for release of vacuum.', True, 'production part 3 wait vacuum release', ['pressure',], 'Vacuum Released. Deactivate  N2 flow')).start()
+            threading.Thread(target=show_prompt_data_check, args=('Process part 3 completed. Press PROCEED to release vacuum.', True, 'production part 3 wait vacuum release', ['pressure',], 'Proceed')).start()
             trigger_alarm()
         else:
             return
@@ -1064,15 +1037,10 @@ class production(threading.Thread):
         update_progress('production part 3', 'Vacuum released. Deactivating nitrogen flow controller.', 100)
         flow_control(0)
         process_list_manage('waiting to release vacuum', 'production_part_3')
-        time.sleep(1.5)
         trigger_alarm()
-        close_prompt('all')
-        time.sleep(1)
-        show_prompt('Production', 'Production completed. Report generated.', True, 'end production')
-        trigger_event()
+        trigger_event('production part 3 end')
         generate_report('production')
         update_progress('', '', 0, True)
-            
         return
 
 
@@ -1090,14 +1058,8 @@ class post_production_1(threading.Thread):
 
         # start
         process_list_manage('data input', 'post_production_day_1')
-        time.sleep(0.5)
-        trigger_event()
-        time.sleep(0.5)
+        trigger_event('post production day 1 start')
         update_progress('post production day 1', 'Post production day 1 has started', 5.0)
-        show_prompt('Post Production Day 1', 'Post Production Day 1 has started')
-        time.sleep(3.1)
-        # data input
-        show_prompt_data_input('Post Production Day 1', '', ['process duration', 'logging interval'], 'post production day 1', 'Start day 1 cleaning')
 
         # wait submit data input
         while not post_production_1_receive_input and process_run:
@@ -1124,16 +1086,11 @@ class post_production_1(threading.Thread):
             post_production_read('last')
             update_progress('post production day 1', 'Process duration reached.', 100.0)
             process_list_manage('waiting to start day 2', 'post_production_wait_day_2')
-            time.sleep(0.5)
-            trigger_event()
+            trigger_event('post production day 1 end')
             update_progress('', '', 0, True)
-            close_prompt('all')
-            time.sleep(1)
-            show_prompt('Post Production Day 1', 'Day 1 cleaning completed', True, '')
             trigger_alarm()
         else:
             return
-        
         return
 
     
@@ -1148,15 +1105,8 @@ class post_production_2(threading.Thread):
 
         # start
         process_list_manage('data input', 'post_production_day_2')
-        time.sleep(0.5)
-        trigger_event()
-        time.sleep(0.5)
+        trigger_event('post production day 2 start')
         update_progress('post production day 2', 'Post production day 2 has started', 5.0)
-        show_prompt('Post Production Day 2', 'Post production day 2 started.')
-        time.sleep(3.1)
-
-        # data input
-        show_prompt_data_input('Post Production Day 2', '', ['process duration', 'logging interval'], 'post production day 2', 'Start day 2 cleaning')
 
         # wait submit data input
         while not post_production_2_receive_input and process_run:
@@ -1183,12 +1133,8 @@ class post_production_2(threading.Thread):
             post_production_read('last')
             update_progress('post production day 2', 'Process duration reached.', 100.0)
             process_list_manage('waiting to start day 3', 'post_production_wait_day_3')
-            time.sleep(0.5)
-            trigger_event()
+            trigger_event('post production day 2 end')
             update_progress('', '', 0, True)
-            close_prompt('all')
-            time.sleep(1)
-            show_prompt('Post Production Day 2', 'Day 2 cleaning completed', True, '')
             trigger_alarm()
         else:
             return
@@ -1208,14 +1154,8 @@ class post_production_3(threading.Thread):
 
         # start
         process_list_manage('data input', 'post_production_day_3')
-        time.sleep(0.5)
-        trigger_event()
-        time.sleep(0.5)
+        trigger_event('post production day 3 start')
         update_progress('post production day 3', 'Post production day 3 has started', 5.0)
-        show_prompt('Post Production Day 3', 'Post production day 3 started.')
-        time.sleep(3.1)
-        # data input
-        show_prompt_data_input('Post Production Day 3', '', ['process duration', 'logging interval'], 'post production day 3', 'Start day 3 drying')
 
         # wait submit data input
         while not post_production_3_receive_input and process_run:
@@ -1242,12 +1182,8 @@ class post_production_3(threading.Thread):
             post_production_read('last')
             update_progress('post production day 3', 'Process duration reached.', 100.0)
             process_list_manage('logging', 'post_production_day_3')
-            time.sleep(0.5)
-            trigger_event()
+            trigger_event('post production day 3 end')
             update_progress('', '', 0, True)
-            close_prompt('all')
-            time.sleep(1)
-            show_prompt('Post Production Day 3', 'Day 3 cleaning completed. Report generated.', True, 'end post production')
             trigger_alarm()
             generate_report('post production')
         else:

@@ -10,6 +10,7 @@ function connect_websocket(){
 
     chatSocket.onmessage = function(e) {
         var data = JSON.parse(e.data).data
+        // console.log(data)
         if ((data.message_type == 'request input before process start') && (window.location.pathname == '/monitoring-sys/')){
             load_data_input_modal(data.message)
         }
@@ -26,7 +27,7 @@ function connect_websocket(){
             prompt_data_check_update(data.message)
         }
         else if (data.message_type == 'trigger event'){
-            get_status()
+            handle_event(data.message)
         }
         else if (data.message_type == 'confirm prompt'){
             load_confirm_prompt(data.message)
@@ -49,6 +50,302 @@ function connect_websocket(){
         else if ((data.message_type == 'report delete response')){
             handle_delete_response(data.message)
         }
+    }
+}
+
+function handle_event(message){
+    if (message.event == ''){
+        get_status()
+    }
+
+    else if (message.event == 'pre production started'){
+        close_prompt()
+        data = {
+            'title': 'Pre Production',
+            'text': 'Pre production started.',
+            'process_name': '',
+            'button_text': '',
+            'wait_for_acknowledge': false,
+        }
+        load_prompt(data)
+        get_status()
+        setTimeout(() => {
+            parameters_list = ['n2 flow rate', 'purging duration']
+            ajax_request('default_values/', 'get', 'get default values specific', {'process_name': 'pre production', 'parameters': JSON.stringify(parameters_list)}).done((ajax_data)=>{
+                data = {
+                    'title': 'Pre Production',
+                    'text': 'Waiting to start purging process.',
+                    'process_name': 'pre production',
+                    'button_text': 'Start',
+                    'variables_list': ajax_data.variables_list,
+                    'wait_for_acknowledge': true,
+                }
+                load_data_input_modal(data)
+            })
+        }, 3100);
+    }
+
+    else if (message.event == 'pre production purging duration reached'){
+        close_prompt()
+        data = {
+            'title': 'Pre Production',
+            'text': 'Purging duration reached. Waiting for deactivation of flow controller.',
+            'process_name': 'pre production deactivate flow',
+            'button_text': 'Deactivate',
+            'wait_for_acknowledge': true,
+        }
+        load_prompt(data)
+    }
+
+    else if (message.event == 'pre production completed'){
+        close_prompt()
+        data = {
+            'title': 'Pre Production',
+            'text': 'Pre production completed. Report generated.',
+            'process_name': 'end pre production',
+            'button_text': 'Proceed',
+            'wait_for_acknowledge': true,
+        }
+        load_prompt(data)
+        get_status()
+    }
+
+    else if (message.event == 'production part 1 start'){
+        close_prompt()
+        data = {
+            'title': 'Production Part 1',
+            'text': 'Production part 1 started.',
+            'process_name': '',
+            'button_text': '',
+            'wait_for_acknowledge': false,
+        }
+        load_prompt(data)
+        get_status()
+        setTimeout(() => {
+            parameters_list = ['n2 flow rate', 'target temperature', 'logging interval', 'heater set point']
+            ajax_request('default_values/', 'get', 'get default values specific', {'process_name': 'production part 1', 'parameters': JSON.stringify(parameters_list)}).done((ajax_data)=>{
+                data = {
+                    'title': 'Production Part 1',
+                    'text': '',
+                    'process_name': 'production part 1',
+                    'button_text': 'Start',
+                    'variables_list': ajax_data.variables_list,
+                    'wait_for_acknowledge': true,
+                }
+                load_data_input_modal(data)
+            })
+        }, 3100);
+    }
+
+    else if (message.event == 'production part 1 end'){
+        close_prompt()
+        data = {
+            'title': 'Production Part 1',
+            'text': 'Production part 1 completed. Start production part 2?',
+            'process_name': 'start production part 2',
+            'button_text': 'Start',
+            'wait_for_acknowledge': true,
+        }
+        load_prompt(data)
+    }
+
+    else if (message.event == 'production part 2 start'){
+        close_prompt()
+        data = {
+            'title': 'Production Part 2',
+            'text': 'Production part 2 started.',
+            'process_name': '',
+            'button_text': '',
+            'wait_for_acknowledge': false,
+        }
+        load_prompt(data)
+        get_status()
+        setTimeout(() => {
+            parameters_list = ['logging interval', 'process duration', 'heater set point']
+            ajax_request('default_values/', 'get', 'get default values specific', {'process_name': 'production part 2', 'parameters': JSON.stringify(parameters_list)}).done((ajax_data)=>{
+                data = {
+                    'title': 'Production Part 2',
+                    'text': '',
+                    'process_name': 'production part 2',
+                    'button_text': 'Start',
+                    'variables_list': ajax_data.variables_list,
+                    'wait_for_acknowledge': true,
+                }
+                load_data_input_modal(data)
+            })
+        }, 3100);
+    }
+
+    else if (message.event == 'production part 2 end'){
+        close_prompt()
+        data = {
+            'title': 'Production Part 2',
+            'text': 'Production part 2 completed. Start production part 3?',
+            'process_name': 'start production part 3',
+            'button_text': 'Start',
+            'wait_for_acknowledge': true,
+        }
+        load_prompt(data)
+    }
+
+    else if (message.event == 'production part 3 start'){
+        close_prompt()
+        data = {
+            'title': 'Production Part 3',
+            'text': 'Production part 3 started.',
+            'process_name': '',
+            'button_text': '',
+            'wait_for_acknowledge': false,
+        }
+        load_prompt(data)
+        get_status()
+        setTimeout(() => {
+            parameters_list = ['n2 flow rate', 'logging interval', 'process duration', 'heater set point']
+            ajax_request('default_values/', 'get', 'get default values specific', {'process_name': 'production part 3', 'parameters': JSON.stringify(parameters_list)}).done((ajax_data)=>{
+                data = {
+                    'title': 'Production Part 3',
+                    'text': '',
+                    'process_name': 'production part 3',
+                    'button_text': 'Start',
+                    'variables_list': ajax_data.variables_list,
+                    'wait_for_acknowledge': true,
+                }
+                load_data_input_modal(data)
+            })
+        }, 3100);
+    }
+
+    else if (message.event == 'production part 3 end'){
+        close_prompt()
+        data = {
+            'title': 'Production Part 3',
+            'text': 'Production completed. Report generated.',
+            'process_name': 'end production',
+            'button_text': 'Acknowledge',
+            'wait_for_acknowledge': true,
+        }
+        load_prompt(data)
+        get_status()
+    }
+
+    else if (message.event == 'post production day 1 start'){
+        close_prompt()
+        data = {
+            'title': 'Post Production Day 1',
+            'text': 'Post Production Day 1 started.',
+            'process_name': '',
+            'button_text': '',
+            'wait_for_acknowledge': false,
+        }
+        load_prompt(data)
+        get_status()
+        setTimeout(() => {
+            parameters_list = ['process duration', 'logging interval']
+            ajax_request('default_values/', 'get', 'get default values specific', {'process_name': 'post production day 1', 'parameters': JSON.stringify(parameters_list)}).done((ajax_data)=>{
+                data = {
+                    'title': 'Post Production Day 1',
+                    'text': '',
+                    'process_name': 'post production day 1',
+                    'button_text': 'Start',
+                    'variables_list': ajax_data.variables_list,
+                    'wait_for_acknowledge': true,
+                }
+                load_data_input_modal(data)
+            })
+        }, 3100);
+    }
+
+    else if (message.event == 'post production day 1 end'){
+        close_prompt()
+        data = {
+            'title': 'Post Production Day 1',
+            'text': 'Post Production Day 1 completed.',
+            'process_name': '',
+            'button_text': 'Acknowledge',
+            'wait_for_acknowledge': true,
+        }
+        load_prompt(data)
+        get_status()
+    }
+
+    else if (message.event == 'post production day 2 start'){
+        close_prompt()
+        data = {
+            'title': 'Post Production Day 2',
+            'text': 'Post Production Day 2 started.',
+            'process_name': '',
+            'button_text': '',
+            'wait_for_acknowledge': false,
+        }
+        load_prompt(data)
+        get_status()
+        setTimeout(() => {
+            parameters_list = ['process duration', 'logging interval']
+            ajax_request('default_values/', 'get', 'get default values specific', {'process_name': 'post production day 2', 'parameters': JSON.stringify(parameters_list)}).done((ajax_data)=>{
+                data = {
+                    'title': 'Post Production Day 2',
+                    'text': '',
+                    'process_name': 'post production day 2',
+                    'button_text': 'Start',
+                    'variables_list': ajax_data.variables_list,
+                    'wait_for_acknowledge': true,
+                }
+                load_data_input_modal(data)
+            })
+        }, 3100);
+    }
+    
+    else if (message.event == 'post production day 2 end'){
+        close_prompt()
+        data = {
+            'title': 'Post Production Day 2',
+            'text': 'Post Production Day 2 completed.',
+            'process_name': '',
+            'button_text': 'Acknowledge',
+            'wait_for_acknowledge': true,
+        }
+        load_prompt(data)
+        get_status()
+    }
+
+    else if (message.event == 'post production day 3 start'){
+        close_prompt()
+        data = {
+            'title': 'Post Production Day 3',
+            'text': 'Post Production Day 3 started.',
+            'process_name': '',
+            'button_text': '',
+            'wait_for_acknowledge': false,
+        }
+        load_prompt(data)
+        get_status()
+        setTimeout(() => {
+            parameters_list = ['process duration', 'logging interval']
+            ajax_request('default_values/', 'get', 'get default values specific', {'process_name': 'post production day 3', 'parameters': JSON.stringify(parameters_list)}).done((ajax_data)=>{
+                data = {
+                    'title': 'Post Production Day 3',
+                    'text': '',
+                    'process_name': 'post production day 3',
+                    'button_text': 'Start',
+                    'variables_list': ajax_data.variables_list,
+                    'wait_for_acknowledge': true,
+                }
+                load_data_input_modal(data)
+            })
+        }, 3100);
+    }
+
+    else if (message.event == 'post production day 3 end'){
+        close_prompt()
+        data = {
+            'title': 'Post Production Day 3',
+            'text': 'Post Production Day 3 completed. Report generated.',
+            'process_name': 'end post production',
+            'button_text': 'Acknowledge',
+            'wait_for_acknowledge': true,
+        }
+        load_prompt(data)
+        get_status()
     }
 }
 

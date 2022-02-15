@@ -539,6 +539,20 @@ def default_values(request):
             }
             return JsonResponse(data)
 
+        elif request.GET.get('mode') == 'get default values specific':
+            process_name = request.GET.get('process_name')
+            parameters = json.loads(request.GET.get('parameters'))
+            variables_list = list(VariableDefault.objects.filter(process=process_name, name__in=parameters).values('name', 'value', 'unit').order_by('name'))
+            success = True
+            message = 'get default value SUCCESSFUL'
+            data = {
+                'success': success,
+                'message': message,
+                'variables_list': variables_list,
+            }
+            print(data)
+            return JsonResponse(data)
+
 
 def date_time_clock(request):
     if request.method == 'GET':
