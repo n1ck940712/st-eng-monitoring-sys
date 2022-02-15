@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 
+from email.policy import default
 from enum import auto, unique
 from os import set_inheritable
 from django.db import models
@@ -121,6 +122,7 @@ class Report(models.Model):
     type = models.CharField(max_length=100)
     file_name = models.CharField(max_length=100, null=True)
     time_completed = UnixTimestampField()
+    deleted = models.BooleanField(default=False)
     
 
 class VariableDefault(models.Model):
