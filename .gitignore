@@ -29,3 +29,4 @@ staticfiles/*
 
 # reports
 *.pdf
+!**/reports
