@@ -1,0 +1,44 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+# Print the IP address
+exec 1>/tmp/rc.local.log 2>&1
+set -x
+
+_IP=$(hostname -I) || true
+if [ "$_IP" ]
+then
+       echo
+       echo "********************************************************"
+       echo "*                                                      *"
+       printf "*     My IP address is %s\n" "$_IP"
+       echo "*                                                      *"
+       echo "********************************************************"
+       echo
+       echo
+fi
+
+#Suppress Kernel Messages
+#dmesg --console-off
+omxplayer /usr/share/plymouth/themes/pix/flotech-intro.mp4 &
+docker start 3441854035c4
+
+(
+	cd /home/pi/monitoring_sys/
+	sudo -u pi env/bin/daphne -b 0.0.0.0 -p 8001 core.asgi:application &
+	sudo -u pi env/bin/python3.7 python/main.py &
+	sudo -u pi env/bin/python3.7 python/instruments.py &
+
+)
+
+exit 0
