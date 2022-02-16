@@ -7,7 +7,7 @@
 $("head").append($("<script></script>").attr("src", "/static/assets/js/websocket.js"))
 $("head").append($("<script></script>").attr("src", "/static/assets/js/widget.js"))
 // date range picker
-$("head").append($("<script></script>").attr("src", "/static/assets/js/plugins/daterangepicker/moment.min.js"));
+// $("head").append($("<script></script>").attr("src", "/static/assets/js/plugins/daterangepicker/moment.min.js")); // moment.js imported in page-report.html
 $("head").append($("<script></script>").attr("src", "/static/assets/js/plugins/daterangepicker/daterangepicker.js"));
 $("head").append($("<link></link>").attr({"href": "/static/assets/js/plugins/daterangepicker/daterangepicker.css", "rel": 'stylesheet'}));
 // PDFObject
@@ -244,7 +244,6 @@ function set_monday_start_of_week(){
 }
 
 function date_range_init_report(){
-    console.log('date range picker init')
     $('.date-range-picker').daterangepicker({
         opens: 'right',
         // singleDatePicker: true,
@@ -261,6 +260,8 @@ function date_range_init_report(){
 
 
 function report_table_init(){
+    
+    $.fn.dataTable.moment('DD MMM YYYY - hh:mm A');
     
     table = $('.table').DataTable({
         bInfo : false,
