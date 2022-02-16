@@ -791,6 +791,7 @@ class pre_production(threading.Thread):
         process_run = True
         pre_production_receive_input = False
         pre_production_start_logging = False
+        deactivate_flow_pre_production = False
 
         # start
         process_list_manage('data input', 'pre production')
