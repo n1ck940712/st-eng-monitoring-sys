@@ -1,5 +1,6 @@
 $(document).ready(()=>{
     connect_websocket()
+    
 })
 
 function connect_websocket(){
@@ -7,6 +8,7 @@ function connect_websocket(){
     + window.location.host
     + '/ws/socket/'
     chatSocket = new WebSocket(endpoint)
+    websocket_sending_flag = false
 
     chatSocket.onmessage = function(e) {
         var data = JSON.parse(e.data).data
@@ -384,12 +386,18 @@ function force_logout(){
 }
 
 function websocket_send(data){
-    data.user_role = $('#user-role').val()
-    data.recipient_ip = '127.0.0.1'
-    chatSocket.send(JSON.stringify({
-        'data': data,
-        'sender': 'UI',
-    }))
+    if (!websocket_sending_flag){
+        websocket_sending_flag = true
+        data.user_role = $('#user-role').val()
+        data.recipient_ip = '127.0.0.1'
+        chatSocket.send(JSON.stringify({
+            'data': data,
+            'sender': 'UI',
+        }))
+        setTimeout(() => {
+            websocket_sending_flag = false
+        }, 1000);
+    }
 }
 
 
