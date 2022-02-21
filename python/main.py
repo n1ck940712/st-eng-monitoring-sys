@@ -860,11 +860,12 @@ class production(threading.Thread):
         threading.Thread.__init__(self)
 
     def run(self):
-        global process_run, production_1_receive_input, production_1_start_logging, change_heater_set_production_1, production_2_receive_input, production_2_start_logging, start_production_3, production_3_receive_input, production_3_start_logging, release_vacuum_production_3
+        global process_run, production_1_receive_input, production_1_start_logging, change_heater_set_production_1, production_2_receive_input, production_2_start_logging, start_production_3, production_3_receive_input, production_3_start_logging, release_vacuum_production_3, start_production_2
         process_run = True
         production_1_receive_input = False
         production_1_start_logging = False
         change_heater_set_production_1 = False
+        start_production_2 = False
         production_2_receive_input = False
         production_2_start_logging = False
         start_production_3 = False
@@ -1210,6 +1211,7 @@ class sensor_reading_update(threading.Thread):
 
     def run(self):
         global ws
+        flow_control(0)
         while 1:
             try:
                 data = {
