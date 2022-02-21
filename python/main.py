@@ -81,6 +81,7 @@ def delete_report(message):
     try:
         database.query('local', 'update', 'UPDATE app_report SET deleted=1 WHERE file_name="%s"' % message['file_name'])
         subprocess.run(['sudo', 'rm', "/home/pi/monitoring_sys/core/static/assets/reports/%s.pdf" % message['file_name']])
+        database.query('local', 'update', 'DELETE FROM app_reportvalue WHERE file_name="%s"' % message['file_name'])
         success = True
         message = 'Report deleted successfully.'
     except:
@@ -107,6 +108,12 @@ def update_report(message):
 
     batch_id = database.query('local', 'get', 'SELECT id FROM app_report WHERE file_name="%s"' % edit_report_name)[0][0]
     report_edit_fault = report.generate(log, batch_id, variable_list)
+    variable_list_disp = str(variable_list).replace("'", '"')
+    report_exist = database.query('local', 'get', 'SELECT * FROM app_reportvalue WHERE file_name="%s"' % edit_report_name)
+    if len(report_exist):
+        database.query('local', 'update', "UPDATE app_reportvalue SET fields='%s'" % variable_list_disp)
+    else:
+        database.query('local', 'insert', "INSERT INTO app_reportvalue (file_name, fields) VALUES ('%s', '%s')" % (edit_report_name, variable_list_disp))
     if not report_edit_fault:
         success = True
     else:

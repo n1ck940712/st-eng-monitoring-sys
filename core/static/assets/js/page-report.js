@@ -220,6 +220,15 @@ function load_report_edit_fields(report_type, file_name){
         </div>`)
         $('#report-edit-form').append($input)
     })
+    ajax_request('report/', 'GET', 'get report fields', {'file_name': file_name}).done((data)=>{
+        variable_list = $.parseJSON(data[0].fields)
+        console.log(variable_list)
+        $.each(variable_list, (index, value)=>{
+            var selector = value.variable.replace(/ /g, '-')
+            $('#'+selector).val(value.value)
+        })
+    })
+
 }
 
 
