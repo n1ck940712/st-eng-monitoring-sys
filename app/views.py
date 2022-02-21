@@ -11,7 +11,7 @@ from django.template import loader
 from django.http import HttpResponse
 from django.core import serializers
 from django import template
-from .models import ProcessLayout, RtuSetting, SaveFile, UserDetail, ProcessList, Report, VariableDefault, Progress
+from .models import ProcessLayout, RtuSetting, SaveFile, UserDetail, ProcessList, Report, VariableDefault, Progress, ReportValue
 from django.db.models import F, Func, Value, CharField
 import json, datetime, os, time, re
 from os import walk
@@ -504,6 +504,11 @@ def report(request):
                 'report_list': x,
             }
             return JsonResponse(report_list2, safe=False)
+
+        if request.GET.get('mode') == 'get report fields':
+            file_name = request.GET.get('file_name')
+            report_fields = list(ReportValue.objects.filter(file_name=file_name).values('fields'))
+            return JsonResponse(report_fields, safe=False)
 
         
 def default_values(request):
