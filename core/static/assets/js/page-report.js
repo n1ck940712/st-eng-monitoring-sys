@@ -186,8 +186,8 @@ function load_report_edit_fields(report_type, file_name){
             'vacuum pump',
             'weighing balance serial no',
             'empty 220L drum',
-            'filled 220L drum with HTPB, Treated',
-            'amount of HTPB, Treated collected',
+            'filled 220L drum with HTPB Treated',
+            'amount of HTPB Treated collected',
         ]
     }
     else if (report_type == 'production'){

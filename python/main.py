@@ -1026,7 +1026,7 @@ class production(threading.Thread):
             update_progress('production part 3', 'Process part 3 completed. Waiting for release of vacuum.', 95)
             close_prompt('all')
             time.sleep(1)
-            threading.Thread(target=show_prompt_data_check, args=('Process part 3 completed. Press PROCEED to release vacuum.', True, 'production part 3 wait vacuum release', ['pressure',], 'Proceed')).start()
+            threading.Thread(target=show_prompt_data_check, args=('Process part 3 completed. Press PROCEED deactivate flow controller.', True, 'production part 3 wait vacuum release', ['pressure',], 'Proceed')).start()
             trigger_alarm()
         else:
             return

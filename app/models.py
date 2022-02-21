@@ -147,3 +147,7 @@ class Progress(models.Model):
     description = models.CharField(max_length=300)
     percentage = models.DecimalField(max_digits=3, decimal_places=1)
     timestamp = UnixTimestampField()
+
+class ReportValue(models.Model):
+    file_name = models.CharField(max_length=200)
+    fields = models.TextField(null=True)
