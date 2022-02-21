@@ -30,7 +30,7 @@ fi
 
 #Suppress Kernel Messages
 #dmesg --console-off
-omxplayer /usr/share/plymouth/themes/pix/flotech-intro.mp4 &
+#omxplayer /usr/share/plymouth/themes/pix/flotech-intro.mp4 &
 docker start 3441854035c4
 
 (

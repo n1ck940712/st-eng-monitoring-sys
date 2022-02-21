@@ -8,6 +8,5 @@ unclutter --timeout 0.1 --hide-on-touch --start-hidden
 @xset s noexpose
 @xset dpms 0 0 0
 
-#sleep 10
-#@chromium-browser --enable-gpu-rasterization --enable-native-gpu-memory-buffers --ignore-gpu-blocklist --use-gl=egl --noerrdialogs --disable-infobars --disk-cache-dir=/dev/null --disk-cache-size=1 --kiosk --disable-restore-session-state --disable-pinch localhost/monitoring-sys/
+sleep 60
 @chromium-browser --enable-gpu-rasterization --enable-native-gpu-memory-buffers --ignore-gpu-blocklist --use-gl=egl --noerrdialogs --disable-infobars --kiosk --disable-restore-session-state --disable-pinch --check-for-update-interval=31536000 localhost/monitoring-sys/
