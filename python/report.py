@@ -32,7 +32,6 @@ def fill_in_fields(f, variable_list):
     return
 
 def generate(log, batch_id, variable_list=None):
-    print('>>>>>>>>>>>> generate report')
     report = database.query('local', 'get', 'SELECT type, time_completed FROM app_report WHERE id="%s"' % batch_id)
     if len(report) > 0: 
         process_name = report[0][0]
@@ -77,7 +76,6 @@ def generate(log, batch_id, variable_list=None):
 
         elif process_name == 'production': 
             rows = database.query('local', 'get', 'SELECT type, flow, flow_unit, temperature, temperature_unit, heater_set, heater_set_unit, pressure, pressure_unit, timestamp FROM app_logdata WHERE batch="%s" ORDER BY timestamp ASC' % batch_id)
-            print(batch_id, rows)
             if len(rows) > 0:
                 valid_data = True
                 elements=get_production_format()

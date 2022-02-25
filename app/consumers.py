@@ -5,7 +5,6 @@ import json
 class UpdateConsumer(AsyncJsonWebsocketConsumer):
 
     async def connect(self):
-        # print(self.scope['user'])
         if str(self.scope['user']) == 'AnonymousUser' and str(self.scope['client'][0]) == '127.0.0.1':
             self.room_group_name = 'server'
         else:
@@ -27,7 +26,6 @@ class UpdateConsumer(AsyncJsonWebsocketConsumer):
             self.room_group_name,
             self.channel_name
         )
-        print('%s.%s' % (self.scope['client'][0], self.scope['client'][1]))
         await self.channel_layer.group_add(
             '%s.%s' % (self.scope['client'][0], self.scope['client'][1]),
             self.channel_name
@@ -37,7 +35,6 @@ class UpdateConsumer(AsyncJsonWebsocketConsumer):
 
     async def receive(self, text_data):
         text_data = json.loads(text_data)
-        print(text_data)
         sender = text_data['sender']
         data = text_data['data']
         recipient_ip = data['recipient_ip']

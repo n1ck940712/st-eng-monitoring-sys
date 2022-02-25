@@ -8,7 +8,7 @@
 # ================================================================
 
 
-from modules import database, logger, encrypt, buzzer
+from modules import database, logger, buzzer
 import os, subprocess, time, threading, json, websocket, report
 from datetime import datetime, timedelta
 
@@ -1368,7 +1368,6 @@ if __name__ == "__main__":
     # init modules
     log = logger.init(os.path.abspath(__file__), '') # logging
     database.init(log) # database
-    cipher = encrypt.init(log) # encryption
     buzzer.init()
     # end init
     log.info("Modules Initiation DONE...")
