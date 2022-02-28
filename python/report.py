@@ -123,7 +123,7 @@ def generate(log, batch_id, variable_list=None):
                     f['section-5-table-data-row-%s-timestamp' % table_row_num] = str(timestamp)
                     f['section-5-table-data-row-%s-pressure' % table_row_num] = '%s %s' % (pressure, pressure_unit)
                     f['section-5-table-data-row-%s-temperature' % table_row_num] = '%s %s' % (temperature, temperature_unit)
-                    f['section-5-table-data-row-%s-heater' % table_row_num] = '%s %s' % (heater_set, heater_set_unit)
+                    f['section-5-table-data-row-%s-heater' % table_row_num] = '%s %s' % (round(heater_set,1), heater_set_unit)
                     f['section-5-table-data-row-%s-flow' % table_row_num] = '%s %s' % (flow, flow_unit)
                 report_name = "production_%s" % (process_date.strftime("%-d%b%Y"))
             else:
@@ -426,10 +426,10 @@ def get_production_format():
         { 'name': 'section-2-table-row-1-col-1', 'type': 'T', 'x1': 12, 'y1': 55, 'x2': 12, 'y2': 55, 'font': 'Arial', 'size': 9, 'bold': 1, 'italic': 0, 'underline': 0, 'foreground': 0, 'background': 0, 'align': 'I', 'text': 'Stage', 'priority': 2, },
         { 'name': 'section-2-table-row-1-col-2', 'type': 'T', 'x1': 29, 'y1': 55, 'x2': 29, 'y2': 55, 'font': 'Arial', 'size': 9, 'bold': 1, 'italic': 0, 'underline': 0, 'foreground': 0, 'background': 0, 'align': 'I', 'text': 'Time', 'priority': 2, },
         { 'name': 'section-2-table-row-1-col-3', 'type': 'T', 'x1': 46, 'y1': 53, 'x2': 73, 'y2': 58, 'font': 'Arial', 'size': 9, 'bold': 1, 'italic': 0, 'underline': 0, 'foreground': 0, 'background': 0, 'align': 'I', 'text': 'Vacuum Pressure (kPa) (S/No: _____________)', 'priority': 2, 'multiline': True},
-        { 'name': 'vacuum pressure serial no', 'type': 'T', 'x1': 47, 'y1': 82, 'x2': 73, 'y2': 58, 'font': 'Arial', 'size': 8, 'bold': 1, 'italic': 0, 'underline': 0, 'foreground': 0, 'background': 0, 'align': 'I', 'text': '', 'priority': 2},
+        { 'name': 'vacuum pressure serial no', 'type': 'T', 'x1': 47, 'y1': 82, 'x2': 73, 'y2': 58, 'font': 'Arial', 'size': 9, 'bold': 1, 'italic': 0, 'underline': 0, 'foreground': 0, 'background': 0, 'align': 'I', 'text': '', 'priority': 2},
         { 'name': 'section-2-table-row-1-col-4', 'type': 'T', 'x1': 79, 'y1': 53, 'x2': 107, 'y2': 58, 'font': 'Arial', 'size': 9, 'bold': 1, 'italic': 0, 'underline': 0, 'foreground': 0, 'background': 0, 'align': 'I', 'text': 'Vessel Temp (°C)                               (S/No: _____________)', 'priority': 2, 'multiline': True},
-        { 'name': 'vessel temp serial no', 'type': 'T', 'x1': 80, 'y1': 82, 'x2': 107, 'y2': 58, 'font': 'Arial', 'size': 8, 'bold': 1, 'italic': 0, 'underline': 0, 'foreground': 0, 'background': 0, 'align': 'I', 'text': '', 'priority': 2},
-        { 'name': 'section-2-table-row-1-col-5', 'type': 'T', 'x1': 111, 'y1': 53, 'x2': 143.5, 'y2': 58, 'font': 'Arial', 'size': 9, 'bold': 1, 'italic': 0, 'underline': 0, 'foreground': 0, 'background': 0, 'align': 'I', 'text': 'Heater Set Point (°C)                                    (S/No: _____________)', 'priority': 2, 'multiline': True},
+        { 'name': 'vessel temp serial no', 'type': 'T', 'x1': 80, 'y1': 82, 'x2': 107, 'y2': 58, 'font': 'Arial', 'size': 9, 'bold': 1, 'italic': 0, 'underline': 0, 'foreground': 0, 'background': 0, 'align': 'I', 'text': '', 'priority': 2},
+        { 'name': 'section-2-table-row-1-col-5', 'type': 'T', 'x1': 111, 'y1': 53, 'x2': 143.5, 'y2': 58, 'font': 'Arial', 'size': 9, 'bold': 1, 'italic': 0, 'underline': 0, 'foreground': 0, 'background': 0, 'align': 'I', 'text': 'Heater Set Point (°C)                    (S/No: _____________)', 'priority': 2, 'multiline': True},
         { 'name': 'heater set serial no', 'type': 'T', 'x1': 112, 'y1': 82, 'x2': 143.5, 'y2': 58, 'font': 'Arial', 'size': 9, 'bold': 1, 'italic': 0, 'underline': 0, 'foreground': 0, 'background': 0, 'align': 'I', 'text': '', 'priority': 2},
         { 'name': 'section-2-table-row-1-col-6', 'type': 'T', 'x1': 144, 'y1': 53, 'x2': 173.5, 'y2': 58, 'font': 'Arial', 'size': 9, 'bold': 1, 'italic': 0, 'underline': 0, 'foreground': 0, 'background': 0, 'align': 'I', 'text': 'Nitrogen Flow Rate (L/min)           (S/No: _____________)', 'priority': 2, 'multiline': True},
         { 'name': 'nitrogen flow serial no', 'type': 'T', 'x1': 145, 'y1': 82, 'x2': 173.5, 'y2': 58, 'font': 'Arial', 'size': 9, 'bold': 1, 'italic': 0, 'underline': 0, 'foreground': 0, 'background': 0, 'align': 'I', 'text': '', 'priority': 2},
@@ -735,4 +735,4 @@ def get_post_production_format():
 if __name__ == '__main__':
     log = logger.init(os.path.abspath(__file__), '') # logging
     database.init(log) # database
-    generate(log, 104)
+    generate(log, 2)

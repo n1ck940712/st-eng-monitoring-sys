@@ -216,7 +216,7 @@ function load_report_edit_fields(report_type, file_name){
             <div class="input-group-prepend">
             <label class="input-group-text text-dark">${value}</label>
             </div>
-            <input type='text' pattern="[a-zA-Z0-9\s]+" title="Alphanumeric characters only." class="form-control" id="${value.replace(/ /g,"-")}" value>
+            <input type='text' title="Alphanumeric characters only." class="form-control" id="${value.replace(/ /g,"-")}" value>
         </div>`)
         $('#report-edit-form').append($input)
     })
